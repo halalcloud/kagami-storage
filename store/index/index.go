@@ -1,14 +1,14 @@
 package index
 
 import (
-	"efs/libs/encoding/binary"
-	"efs/libs/errors"
-	"efs/store/conf"
-	myos "efs/store/os"
 	"bufio"
 	"fmt"
-	log "efs/log/glog"
 	"io"
+	"kagamistoreage/libs/encoding/binary"
+	"kagamistoreage/libs/errors"
+	log "kagamistoreage/log/glog"
+	"kagamistoreage/store/conf"
+	myos "kagamistoreage/store/os"
 	"os"
 	"sync"
 	"time"

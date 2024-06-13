@@ -1,11 +1,11 @@
 package multipartupload
 
 import (
-	"efs/authacess/conf"
+	"kagamistoreage/authacess/conf"
 
-	"efs/libs/errors"
-	log "efs/log/glog"
 	"io"
+	"kagamistoreage/libs/errors"
+	log "kagamistoreage/log/glog"
 	"os"
 	"path/filepath"
 	"sync"

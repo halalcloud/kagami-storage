@@ -3,21 +3,21 @@ package main
 import (
 	"bytes"
 	"crypto/sha1"
-	"efs/directory/conf"
-	"efs/directory/hbase"
-	"efs/directory/snowflake"
-	myzk "efs/directory/zk"
-	"efs/libs/errors"
-	"efs/libs/meta"
 	b64 "encoding/base64"
 	"encoding/hex"
 	"encoding/json"
+	"kagamistoreage/directory/conf"
+	"kagamistoreage/directory/hbase"
+	"kagamistoreage/directory/snowflake"
+	myzk "kagamistoreage/directory/zk"
+	"kagamistoreage/libs/errors"
+	"kagamistoreage/libs/meta"
 	"strconv"
 	"strings"
 	"sync"
 	"time"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 
 	"github.com/samuel/go-zookeeper/zk"
 )
@@ -542,7 +542,7 @@ func (d *Directory) getexpfilename(bucket, filename string) string {
 		b64.URLEncoding.EncodeToString([]byte(filename))
 }
 
-//UpdateExp update expire data for http chgexp
+// UpdateExp update expire data for http chgexp
 func (d *Directory) UpdateExp(bucket string, f *meta.File) (err error) {
 	if err = d.hBase.UpdateExp(bucket, f); err != nil {
 		if !(err == errors.ErrNeedleNotExist || err == errors.ErrSrcBucketNoExist) {
@@ -650,7 +650,7 @@ func (d *Directory) Getkeyid() (key int64, err error) {
 	return
 }
 
-//isOverWrite  is resource over write
+// isOverWrite  is resource over write
 func (d *Directory) isOverWrite(overWriteFlag int) bool {
 	return overWriteFlag > 0
 }
@@ -1269,7 +1269,7 @@ func (d *Directory) DestroyExpire() {
 	}
 }
 
-//  UpdataCopyMetas
+// UpdataCopyMetas
 func (d *Directory) UpdataCopyMetas(bucket, filename, destbucket, destfname string,
 	overWriteFlag int) (fsize, oldsize string, err error) {
 	var (
@@ -1376,7 +1376,7 @@ func (d *Directory) delete_overwrite_exprfile(bucket, filename,
 	return
 }
 
-//  UpdataMoveMetas
+// UpdataMoveMetas
 func (d *Directory) UpdataMoveMetas(bucket, filename, destbucket,
 	destfname string, overWriteFlag int) (fsize, oldsize string, err error) {
 
@@ -1495,7 +1495,7 @@ func (d *Directory) GetFileList(bucket, limit, prefix, delimiter, marker string)
 	return
 }
 
-//destory file list
+// destory file list
 func (d *Directory) GetDestroyFileList(bucket, limit, marker string) (dlResp *meta.DestroyListResponse, trash_flag bool, err error) {
 	var (
 		fl       *meta.FileList
@@ -1554,7 +1554,7 @@ func (d *Directory) GetDestroyFileList(bucket, limit, marker string) (dlResp *me
 	return
 }
 
-//get Destroy File Needle
+// get Destroy File Needle
 func (d *Directory) getDestroyFileNeedles(needlekey int64) (dfn *meta.DFileNeedle, link int32, err error) {
 	var (
 		n *meta.Needle
@@ -1683,31 +1683,31 @@ func (d *Directory) Clean_timeout_file(bucket string, begin, end int64) (failedf
 }
 */
 
-//Bucket Create do create hbase table
+// Bucket Create do create hbase table
 func (d *Directory) BucketCreate(bucket, families string) (err error) {
 	err = d.hBase.CreateTable(bucket, families)
 	return
 }
 
-//Bucket Rename do rename hbase table
+// Bucket Rename do rename hbase table
 func (d *Directory) BucketRename(bucket_src, bucket_dst string) (err error) {
 	err = d.hBase.RenameTable(bucket_src, bucket_dst)
 	return
 }
 
-//Bucket Delete do rename hbase table
+// Bucket Delete do rename hbase table
 func (d *Directory) BucketDelete(bucket string) (err error) {
 	err = d.hBase.DeleteTable(bucket)
 	return
 }
 
-//Bucket Destroy do delete hbase table
+// Bucket Destroy do delete hbase table
 func (d *Directory) BucketDestroy(bucket string) (err error) {
 	err = d.hBase.DestroyTable(bucket)
 	return
 }
 
-//Bucket List do list hbase table
+// Bucket List do list hbase table
 func (d *Directory) BucketList(regular string) (list []string, err error) {
 	list, err = d.hBase.ListTable(regular)
 	return

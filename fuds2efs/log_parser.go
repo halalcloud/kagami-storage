@@ -2,10 +2,10 @@ package main
 
 import (
 	"bufio"
-	log "efs/fuds2efs/libs/glog"
 	"errors"
 	"io"
 	"io/ioutil"
+	log "kagamistoreage/fuds2kagamistoreage/libs/glog"
 	"os"
 	"strconv"
 	"strings"

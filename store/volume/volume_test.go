@@ -1,10 +1,10 @@
 package volume
 
 import (
-	"efs/libs/errors"
-	"efs/store/conf"
-	"efs/store/needle"
 	"bytes"
+	"kagamistoreage/libs/errors"
+	"kagamistoreage/store/conf"
+	"kagamistoreage/store/needle"
 	"os"
 	"testing"
 	"time"

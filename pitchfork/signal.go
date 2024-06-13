@@ -5,7 +5,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 )
 
 // StartSignal register signals handler.

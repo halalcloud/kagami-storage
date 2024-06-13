@@ -4,8 +4,8 @@ import (
 	"crypto/hmac"
 	"crypto/sha1"
 
-	"efs/bucket/conf"
 	"encoding/base64"
+	"kagamistoreage/bucket/conf"
 
 	//	"fmt"
 

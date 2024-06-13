@@ -4,11 +4,11 @@ import (
 	"archive/tar"
 	"archive/zip"
 	"compress/gzip"
-	"efs/authacess/efs"
-	log "efs/log/glog"
 	b64 "encoding/base64"
 	"encoding/json"
 	"io"
+	"kagamistoreage/authacess/efs"
+	log "kagamistoreage/log/glog"
 	"mime/multipart"
 	"strings"
 

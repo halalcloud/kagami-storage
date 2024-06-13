@@ -2,13 +2,13 @@ package efs
 
 import (
 	"bytes"
-	"efs/libs/errors"
-	"efs/libs/meta"
-	"efs/proxy/conf"
 	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
+	"kagamistoreage/libs/errors"
+	"kagamistoreage/libs/meta"
+	"kagamistoreage/proxy/conf"
 	"math/rand"
 	"net"
 	"net/http"
@@ -17,7 +17,7 @@ import (
 	"strings"
 	"time"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 )
 
 const (
@@ -710,7 +710,7 @@ func (b *Efs) UploadStore(res *meta.Response, buf []byte) (err error) {
 	return
 }
 
-//upload directory
+// upload directory
 func (b *Efs) UploadDirectory(ekey, mime, sha1 string, filesize int, nkey int64,
 	vid int32, cookie int32, overWriteFlag int) (oFileSize int64, err error) {
 	var (
@@ -1233,7 +1233,7 @@ func (b *Efs) BucketList(regular string) (list []string, err error) {
 	return
 }
 
-//bucket stat
+// bucket stat
 func (b *Efs) BucketStat(ekey string) (exist bool, err error) {
 	var (
 		uri    string

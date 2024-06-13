@@ -1,9 +1,9 @@
 package main
 
 import (
-	"efs/egc/conf"
-	log "efs/log/glog"
 	"flag"
+	"kagamistoreage/egc/conf"
+	log "kagamistoreage/log/glog"
 	"os"
 	"os/signal"
 	"runtime"

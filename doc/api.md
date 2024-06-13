@@ -30,16 +30,16 @@
 | 接口功能           | 下载  |
 | 请求模块           | efs-proxy  |
 | 请求方法           | GET  |
-| 请求路径           | /efs/${bucketname}/${filename}  |
+| 请求路径           | /kagamistoreage/${bucketname}/${filename}  |
 | 请求HOST           | $host  |
 | 请求参数           | token (如不放参数，放请求头Authorization)  |
-| 请求头             | GET /efs/${bucketname}/${filename} HTTP/1.1<br>Host: $host<br> Date: ${GMT date}<br> Authorization:accesskey+':'+urlsafe_b64encode(hmac-sha1(accessSecret, 'request.method\nbucketname\nfilename\nexpire\n'))+':'+expire |
+| 请求头             | GET /kagamistoreage/${bucketname}/${filename} HTTP/1.1<br>Host: $host<br> Date: ${GMT date}<br> Authorization:accesskey+':'+urlsafe_b64encode(hmac-sha1(accessSecret, 'request.method\nbucketname\nfilename\nexpire\n'))+':'+expire |
 | 备注               | expire为时间戳  |
 | 请求内容           | 无  |
 | 响应码             | 200  |
 | 响应头             | Server: Efs |
 | 响应内容           | data bytes  |
-| 示例               | GET /efs/live/my-image.jpg HTTP/1.1<br> Host: $host<br> Date: ${GMT date}<br>  |
+| 示例               | GET /kagamistoreage/live/my-image.jpg HTTP/1.1<br> Host: $host<br> Date: ${GMT date}<br>  |
 ###3.删除
 |    |    |
 | :-----           | :---  |
@@ -62,14 +62,14 @@
 | 接口功能           | 下载  |
 | 请求模块           | efs-proxy  |
 | 请求方法           | HEAD  |
-| 请求路径           | /efs/${bucketname}/${filename}  |
+| 请求路径           | /kagamistoreage/${bucketname}/${filename}  |
 | 请求HOST           | $host  |
 | 请求参数           | token (如不放参数，放请求头Authorization)  |
-| 请求头             | HEAD /efs/${bucketname}/${filename} HTTP/1.1<br>Host: $host<br> Date: ${GMT date}<br> Authorization:accesskey+':'+urlsafe_b64encode(hmac-sha1(accessSecret, 'request.method\nbucketname\nfilename\nexpire\n'))+':'+expire |
+| 请求头             | HEAD /kagamistoreage/${bucketname}/${filename} HTTP/1.1<br>Host: $host<br> Date: ${GMT date}<br> Authorization:accesskey+':'+urlsafe_b64encode(hmac-sha1(accessSecret, 'request.method\nbucketname\nfilename\nexpire\n'))+':'+expire |
 | 备注               | expire为时间戳  |
 | 请求内容           | 无  |
 | 响应码             | 200  |
 | 响应头             | Server: Efs |
 | 响应内容           | 无  |
-| 示例               | HEAD /efs/live/my-image.jpg HTTP/1.1<br> Host: $host<br> Date: ${GMT date}<br>  |
+| 示例               | HEAD /kagamistoreage/live/my-image.jpg HTTP/1.1<br> Host: $host<br> Date: ${GMT date}<br>  |
 test

@@ -2,11 +2,12 @@ package database
 
 import (
 	"database/sql"
-	"efs/bucket/conf"
 	"fmt"
+	"kagamistoreage/bucket/conf"
+
+	log "kagamistoreage/log/glog"
 
 	_ "github.com/go-sql-driver/mysql"
-	log "efs/log/glog"
 )
 
 var (

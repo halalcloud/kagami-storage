@@ -1,8 +1,8 @@
 package main
 
 import (
-	"efs/store/conf"
-	"efs/store/needle"
+	"kagamistoreage/store/conf"
+	"kagamistoreage/store/needle"
 	"time"
 )
 

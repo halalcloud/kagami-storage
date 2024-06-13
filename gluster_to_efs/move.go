@@ -1,10 +1,10 @@
 package main
 
 import (
-	"efs/gluster_to_efs/conf"
+	"kagamistoreage/gluster_to_kagamistoreage/conf"
 
-	log "efs/log/glog"
 	"flag"
+	log "kagamistoreage/log/glog"
 
 	efsconf "ecloud_gosdk.v1/conf"
 	"ecloud_gosdk.v1/ecloud"
@@ -14,6 +14,7 @@ import (
 	//	libpath "path"
 	"path/filepath"
 	"runtime"
+
 	//	"strings"
 	"sync"
 	"time"

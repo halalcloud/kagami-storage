@@ -1,14 +1,15 @@
 package zk
 
 import (
-	"efs/directory/conf"
+	"kagamistoreage/directory/conf"
 	"path"
 
 	"encoding/json"
 
-	"efs/libs/meta"
+	"kagamistoreage/libs/meta"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
+
 	"github.com/samuel/go-zookeeper/zk"
 )
 

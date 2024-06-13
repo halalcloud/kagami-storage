@@ -1,10 +1,10 @@
 package hbase
 
 import (
-	"efs/directory/hbase/hbasethrift"
+	"kagamistoreage/directory/hbase/hbasethrift"
 	"time"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 )
 
 const (

@@ -1,11 +1,11 @@
 package main
 
 import (
-	"efs/libs/errors"
-	"efs/libs/meta"
-	log "efs/log/glog"
 	"encoding/json"
 	"fmt"
+	"kagamistoreage/libs/errors"
+	"kagamistoreage/libs/meta"
+	log "kagamistoreage/log/glog"
 	"net/http"
 	"time"
 )

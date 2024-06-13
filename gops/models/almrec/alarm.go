@@ -1,8 +1,8 @@
 package almrec
 
 import (
-	"efs/gops/models/mail"
-	"efs/gops/models/user"
+	"kagamistoreage/gops/models/mail"
+	"kagamistoreage/gops/models/user"
 	"time"
 )
 

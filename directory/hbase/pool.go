@@ -2,9 +2,9 @@ package hbase
 
 import (
 	"container/list"
-	"efs/directory/hbase/hbasethrift"
-	derrors "efs/libs/errors"
 	"errors"
+	"kagamistoreage/directory/hbase/hbasethrift"
+	derrors "kagamistoreage/libs/errors"
 	"sync"
 	"time"
 )
@@ -27,65 +27,65 @@ var ErrPoolClosed = errors.New("pool: get on closed pool")
 // application creates a pool at application startup and makes it available to
 // request handlers using a global variable.
 //
-//  func newPool() *pool.Pool {
-//      return &pool.Pool{
-//          MaxIdle: 3,
-//          IdleTimeout: 240 * time.Second,
-//          Dial: func () (redis.Conn, error) {
-//              c, err := redis.Dial("tcp", server)
-//              if err != nil {
-//                  return nil, err
-//              }
-//              return c, err
-//          },
-//          TestOnBorrow: func(c redis.Conn, t time.Time) error {
-//              _, err := c.Do("PING")
-//              return err
-//          },
-//      }
-//  }
+//	func newPool() *pool.Pool {
+//	    return &pool.Pool{
+//	        MaxIdle: 3,
+//	        IdleTimeout: 240 * time.Second,
+//	        Dial: func () (redis.Conn, error) {
+//	            c, err := redis.Dial("tcp", server)
+//	            if err != nil {
+//	                return nil, err
+//	            }
+//	            return c, err
+//	        },
+//	        TestOnBorrow: func(c redis.Conn, t time.Time) error {
+//	            _, err := c.Do("PING")
+//	            return err
+//	        },
+//	    }
+//	}
 //
-//  var (
-//      p *pool.Pool
-//  )
+//	var (
+//	    p *pool.Pool
+//	)
 //
-//  func main() {
-//      flag.Parse()
-//      p = newPool()
-//      ...
-//  }
+//	func main() {
+//	    flag.Parse()
+//	    p = newPool()
+//	    ...
+//	}
 //
 // A request handler gets a connection from the pool and closes the connection
 // when the handler is done:
 //
-//  func serveHome(w http.ResponseWriter, r *http.Request) {
-//      conn, err := p.Get()
-//      if err != nil {
-//          defer p.Put(conn)
-//      }
-//      ....
-//  }
+//	func serveHome(w http.ResponseWriter, r *http.Request) {
+//	    conn, err := p.Get()
+//	    if err != nil {
+//	        defer p.Put(conn)
+//	    }
+//	    ....
+//	}
 //
 // thrift exmples.
-//  p = &pool.Pool{
-//    Dail: func() (interface{}, error) {
-//        sock, err := thrift.NewTSocketTimeout(":1011", 15*time.Second)
-//        if err != nil {
-//            return nil, err
-//        }
-//        tF := thrift.NewTFramedTransportFactory(thrift.NewTTransportFactory())
-//        pF := thrift.NewTBinaryProtocolFactoryDefault()
-//        client := testRpc.NewRpcServiceClientFactory(tF.GetTransport(sock), pF)
-//        client.Transport.Open()
-//        return client, nil
-//    },
-//    Close: func(c interface{}) error {
-//        return c.(*testRpc.RpcServiceClient).Transport.Close()
-//    },
-//    MaxActive: 2,
-//    MaxIdle:   3,
-//    //IdleTimeout: 1 * time.Second,
 //
+//	p = &pool.Pool{
+//	  Dail: func() (interface{}, error) {
+//	      sock, err := thrift.NewTSocketTimeout(":1011", 15*time.Second)
+//	      if err != nil {
+//	          return nil, err
+//	      }
+//	      tF := thrift.NewTFramedTransportFactory(thrift.NewTTransportFactory())
+//	      pF := thrift.NewTBinaryProtocolFactoryDefault()
+//	      client := testRpc.NewRpcServiceClientFactory(tF.GetTransport(sock), pF)
+//	      client.Transport.Open()
+//	      return client, nil
+//	  },
+//	  Close: func(c interface{}) error {
+//	      return c.(*testRpc.RpcServiceClient).Transport.Close()
+//	  },
+//	  MaxActive: 2,
+//	  MaxIdle:   3,
+//	  //IdleTimeout: 1 * time.Second,
 type Pool struct {
 
 	// Dial is an application supplied function for creating new connections.

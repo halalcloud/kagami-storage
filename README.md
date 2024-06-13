@@ -1,6 +1,6 @@
-efs
+# kagami-storage
 ==============
-`efs` 是基于facebook haystack 用golang实现的小文件存储系统。
+`kagami-storage` 曾用名 (`efs`) 是基于facebook haystack 用golang实现的小文件存储系统。
 
 ---------------------------------------
   * [特性](#特性)
@@ -41,14 +41,14 @@ $ mkdir /ecloud/src -p
 $ cd /ecloud
 $ export GOPATH=$GOPATH:`pwd`
 $ cd src
-$ git clone git@git.c4hcdn.cn:cloud-storage-group/efs.git
+$ git clone git@git.github.com:halalcloud/kagami-storage.git
 $ cd efs
 $ go get ./...
 ```
 
 2.安装directory、store、pitchfork、proxy模块(配置文件请依据实际机器环境配置)
 ```sh
-$ cd /ecloud/src/efs/directory
+$ cd /ecloud/src/kagamistoreage/directory
 $ go install
 $ cp directory.toml /ecloud/bin/directory.toml
 $ cd ../store/
@@ -71,13 +71,13 @@ $ nohup /ecloud/bin/directory -c /ecloud/bin/directory.toml &
 $ nohup /ecloud/bin/store -c /ecloud/bin/store.toml &
 $ nohup /ecloud/bin/pitchfork -c /ecloud/bin/pitchfork.toml &
 $ nohup /ecloud/bin/proxy -c /ecloud/bin/proxy.toml &
-$ cd /ecloud/src/efs/ops
+$ cd /ecloud/src/kagamistoreage/ops
 $ nohup python runserver.py &
 ```
 
 ### 六、测试
- * efs初始化，分配存储空间，请查看[这里](http://git.c4hcdn.cn:85/cloud-storage-group/efs/tree/master/ops/README.md)
- * 请求efs，请查看[这里](http://git.c4hcdn.cn:85/cloud-storage-group/efs/tree/master/doc/proxy.md)
+ * efs初始化，分配存储空间，请查看[这里](https://github.com/halalcloud/kagami-storage/tree/master/ops/README.md)
+ * 请求efs，请查看[这里](https://github.com/halalcloud/kagami-storage/tree/master/doc/proxy.md)
 
 ## 集群
 
@@ -104,7 +104,7 @@ $ nohup python runserver.py &
  * ops作为efs的后台管理界面，负责分配存储、扩容、压缩等维护工作
  
 ## API
-[api文档](http://git.c4hcdn.cn:85/cloud-storage-group/efs/tree/master/doc)
+[api文档](https://github.com/halalcloud/kagami-storage/tree/master/doc)
 
 ## 更多
 

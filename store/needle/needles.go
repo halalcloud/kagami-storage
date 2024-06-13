@@ -1,8 +1,8 @@
 package needle
 
 import (
-	"efs/libs/errors"
 	"io"
+	"kagamistoreage/libs/errors"
 )
 
 // Needles is needle list.

@@ -1,9 +1,9 @@
 package main
 
 import (
-	"efs/authacess/conf"
-	log "efs/log/glog"
 	"flag"
+	"kagamistoreage/authacess/conf"
+	log "kagamistoreage/log/glog"
 	"os"
 	"os/signal"
 	"runtime"

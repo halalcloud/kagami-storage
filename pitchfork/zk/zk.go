@@ -1,13 +1,13 @@
 package zk
 
 import (
-	"efs/libs/meta"
-	"efs/pitchfork/conf"
 	"encoding/json"
 	"fmt"
+	"kagamistoreage/libs/meta"
+	"kagamistoreage/pitchfork/conf"
 	"path"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 
 	"github.com/samuel/go-zookeeper/zk"
 )
@@ -77,7 +77,7 @@ func (z *Zookeeper) Exist_create(spath string) (err error) {
 	return
 }
 
-//设置需要修复的volume信息
+// 设置需要修复的volume信息
 func (z *Zookeeper) SetVolumeRecoverState(vid int32, storeid, srcstoreid string) (err error) {
 	var (
 		recover_path string

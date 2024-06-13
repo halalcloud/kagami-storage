@@ -1,9 +1,9 @@
 package main
 
 import (
-	"efs/pitchfork/conf"
-	myzk "efs/store/zk"
 	"fmt"
+	"kagamistoreage/pitchfork/conf"
+	myzk "kagamistoreage/store/zk"
 	"testing"
 	"time"
 )

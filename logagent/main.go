@@ -1,9 +1,10 @@
 package main
 
 import (
-	"efs/logagent/conf"
-	log "efs/log/glog"
 	"flag"
+	log "kagamistoreage/log/glog"
+	"kagamistoreage/logagent/conf"
+
 	//	"fmt"
 	//"os"
 	//"os/signal"

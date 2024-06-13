@@ -3,6 +3,7 @@ package conf
 import (
 	"io/ioutil"
 	"os"
+
 	/*
 		"path"
 		"strings"
@@ -18,7 +19,7 @@ type Config struct {
 	// api
 	HttpAddr string
 	// directory
-	EfsAddr          string
+	EfsAddr string
 	/*
 		// download EGCDomain
 		EGCDomain string
@@ -59,7 +60,7 @@ func NewConfig(conf string) (c *Config, err error) {
 		return
 	}
 	/*
-		// efs,/efs,/efs/ convert to /efs/
+		// efs,/efs,/kagamistoreage/ convert to /kagamistoreage/
 		if c.Prefix != "" {
 			c.Prefix = path.Join("/", c.Prefix) + "/"
 			// http://EGCDomain/ covert to http://EGCDomain

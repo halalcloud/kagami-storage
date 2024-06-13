@@ -1,15 +1,15 @@
 package main
 
 import (
-	"efs/libs/errors"
-	"efs/store/needle"
-	"efs/store/volume"
+	"kagamistoreage/libs/errors"
+	"kagamistoreage/store/needle"
+	"kagamistoreage/store/volume"
 	"mime/multipart"
 	"net/http"
 	"strconv"
 	"time"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 )
 
 // startApi start api http listen.

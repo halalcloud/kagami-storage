@@ -1,8 +1,8 @@
 package conf
 
 import (
-	"efs/store/needle"
 	"io/ioutil"
+	"kagamistoreage/store/needle"
 	"os"
 	"time"
 
@@ -83,7 +83,6 @@ type Limit struct {
 }
 
 // Code to implement the TextUnmarshaler interface for `Duration`:
-//
 type Duration struct {
 	time.Duration
 }

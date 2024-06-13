@@ -8,7 +8,7 @@ EfsAddr = "192.168.10.120:6065"
 
 Domain = "http://192.168.10.120:2232/"                                                                              
 
-#Prefix = "/efs/"
+#Prefix = "/kagamistoreage/"
 
 MaxFileSize = 10485760
 

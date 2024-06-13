@@ -1,20 +1,21 @@
 package main
 
 import (
-	"efs/geo_replication/bucket"
-	"efs/geo_replication/conf"
-	"efs/geo_replication/efs"
+	"kagamistoreage/geo_replication/bucket"
+	"kagamistoreage/geo_replication/conf"
+	"kagamistoreage/geo_replication/efs"
 
-	"efs/geo_replication/sync_dest"
-	log "efs/log/glog"
 	"encoding/base64"
+	"kagamistoreage/geo_replication/sync_dest"
+	log "kagamistoreage/log/glog"
+
 	//"fmt"
 
 	"strconv"
 	"strings"
 	"time"
 
-	"github.com/Shopify/sarama"
+	"github.com/IBM/sarama"
 	"github.com/wvanbergen/kafka/consumergroup"
 	"github.com/wvanbergen/kazoo-go"
 )

@@ -1,9 +1,9 @@
 package main
 
 import (
-	log "efs/log/glog"
-	"efs/pitchfork/conf"
 	"flag"
+	log "kagamistoreage/log/glog"
+	"kagamistoreage/pitchfork/conf"
 )
 
 var (

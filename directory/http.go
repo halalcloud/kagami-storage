@@ -1,15 +1,15 @@
 package main
 
 import (
-	"efs/libs/meta"
 	"encoding/json"
+	"kagamistoreage/libs/meta"
 	"net/http"
 	"time"
 
 	"bytes"
-	log "efs/log/glog"
 	"fmt"
 	"io/ioutil"
+	log "kagamistoreage/log/glog"
 	"net"
 	"net/url"
 	"strconv"
@@ -213,7 +213,7 @@ func HttpChgmWriter(r *http.Request, wr http.ResponseWriter, start time.Time, re
 		r.URL.Path, r.Form.Encode(), time.Now().Sub(start).Seconds(), ret)
 }
 
-//HttpChgexpWriter
+// HttpChgexpWriter
 func HttpChgexpWriter(r *http.Request, wr http.ResponseWriter, start time.Time, res *meta.Response) {
 	var (
 		err      error

@@ -1,16 +1,16 @@
 package ops
 
 import (
-	"efs/gops/models/almrec"
-	"efs/gops/models/global"
-	"efs/gops/models/sstat"
-	"efs/gops/models/store"
-	"efs/gops/models/types"
-	"efs/gops/models/zk"
-	"efs/libs/meta"
-	"efs/libs/stat"
 	"errors"
 	"fmt"
+	"kagamistoreage/gops/models/almrec"
+	"kagamistoreage/gops/models/global"
+	"kagamistoreage/gops/models/sstat"
+	"kagamistoreage/gops/models/store"
+	"kagamistoreage/gops/models/types"
+	"kagamistoreage/gops/models/zk"
+	"kagamistoreage/libs/meta"
+	"kagamistoreage/libs/stat"
 	"sort"
 	"strconv"
 	"strings"
@@ -228,140 +228,140 @@ func (o *Ops) DoRecover() {
 }
 
 /*
-func (o *Ops) DoRecover() {
-	var (
-		MAX_RECOVER = 5
-		err         error
-		vids        []string
-		rn          map[uint64][]uint64
-		rr          map[uint64][]uint64
-	)
+	func (o *Ops) DoRecover() {
+		var (
+			MAX_RECOVER = 5
+			err         error
+			vids        []string
+			rn          map[uint64][]uint64
+			rr          map[uint64][]uint64
+		)
 
-	for {
-		groups := o.GetGroup()
-		stores := global.STORES
-		volumes := global.VOLUMES
-		rn = make(map[uint64][]uint64)
-		rr = make(map[uint64][]uint64)
-		//rr
-		for _, group := range groups {
-			for _, sid := range group.StoreIds {
-				store, ok := stores[sid]
-				if !ok {
-					beego.Error("statoverview  sid:", sid, " no exist")
-					continue
-				}
-
-				for _, vid := range store.Volumes {
-					volume, ok := volumes[vid]
+		for {
+			groups := o.GetGroup()
+			stores := global.STORES
+			volumes := global.VOLUMES
+			rn = make(map[uint64][]uint64)
+			rr = make(map[uint64][]uint64)
+			//rr
+			for _, group := range groups {
+				for _, sid := range group.StoreIds {
+					store, ok := stores[sid]
 					if !ok {
-						beego.Error("statoverview  vid:", vid, " no exist")
+						beego.Error("statoverview  sid:", sid, " no exist")
 						continue
 					}
-					if volume.Status[sid] == global.Statusrecover {
-						rr[group.Id] = append(rr[group.Id], vid)
-					}
-				}
-			}
-		}
-		beego.Info("rr info:", rr)
 
-		//rn
-		var sids []string
-		var stat *zk.Recoverystat
-		var flag bool
-		if vids, err = o.zk.RecoveryVids(); err != nil {
-			beego.Error("get recover vid error ", err)
-			continue
-		}
-		for _, v := range vids {
-			vid, _ := strconv.ParseUint(v, 10, 64)
-			//----------filter recover ok
-			if sids, err = o.zk.RecoverySids(strconv.FormatUint(vid, 10)); err != nil {
-				beego.Error("get recovery sids error ", err)
-				continue
-			}
-			flag = true
-			for _, sid := range sids {
-				if stat, err = o.zk.RecoveryStat(strconv.FormatUint(vid, 10), sid); err != nil {
-					flag = false
-					beego.Error("get recovery stat error  vid ", vid, " sid ", sid)
-					continue
-				}
-				if stat.ReStatus != Recover_ok {
-					flag = false
-				}
-			}
-			if flag {
-				continue
-			}
-			//----------
-			for _, group := range groups {
-				for _, vo := range group.Volumes {
-					if vo == vid {
-						rn[group.Id] = append(rn[group.Id], vid)
-					}
-				}
-			}
-		}
-		beego.Info("rn info:", rn)
-
-		//add recover
-		for k, v := range rr {
-			rvids, ok := rn[k]
-			if ok && len(rvids) >= MAX_RECOVER {
-				continue
-			}
-			i := 0
-			recover_nums := MAX_RECOVER - len(rvids)
-			for _, rvid := range v {
-				if i == recover_nums-1 {
-					break
-				}
-				beego.Info("i,num", i, recover_nums-1)
-				vol := volumes[rvid]
-				beego.Info("recover vol:", rvid)
-				if len(vol.StoreIds) == len(vol.Badstoreids) {
-					beego.Error(rvid, " all replicate are failed")
-					continue
-				}
-				var srcid string
-				for _, srcid = range vol.StoreIds {
-					if len(vol.Badstoreids) == 1 {
-						if srcid != vol.Badstoreids[0] {
-							break
+					for _, vid := range store.Volumes {
+						volume, ok := volumes[vid]
+						if !ok {
+							beego.Error("statoverview  vid:", vid, " no exist")
+							continue
 						}
-					}
-					if len(vol.Badstoreids) == 2 {
-						if srcid != vol.Badstoreids[0] && srcid != vol.Badstoreids[1] {
-							break
+						if volume.Status[sid] == global.Statusrecover {
+							rr[group.Id] = append(rr[group.Id], vid)
 						}
 					}
 				}
-
-				srcStore := stores[srcid]
-				destStore := stores[vol.Badstoreids[0]]
-				if _, fv, _, err := destStore.Sinfo(); err != nil || fv <= 0 {
-					beego.Info("get dest store err", err)
-					continue
-				}
-				//	beego.Error("do recover ")
-				if err = o.RecoverVolume(srcStore.Rebalance, destStore.Rack, destStore.Id, rvid); err != nil {
-					beego.Info("do recover err ", err)
-					continue
-				}
-				i++
 			}
-			//rn[k] = append(rn[k], v[0])
-		}
+			beego.Info("rr info:", rr)
 
-		select {
-		case <-time.After(30 * time.Second):
-			beego.Info("do recover...")
-			break
+			//rn
+			var sids []string
+			var stat *zk.Recoverystat
+			var flag bool
+			if vids, err = o.zk.RecoveryVids(); err != nil {
+				beego.Error("get recover vid error ", err)
+				continue
+			}
+			for _, v := range vids {
+				vid, _ := strconv.ParseUint(v, 10, 64)
+				//----------filter recover ok
+				if sids, err = o.zk.RecoverySids(strconv.FormatUint(vid, 10)); err != nil {
+					beego.Error("get recovery sids error ", err)
+					continue
+				}
+				flag = true
+				for _, sid := range sids {
+					if stat, err = o.zk.RecoveryStat(strconv.FormatUint(vid, 10), sid); err != nil {
+						flag = false
+						beego.Error("get recovery stat error  vid ", vid, " sid ", sid)
+						continue
+					}
+					if stat.ReStatus != Recover_ok {
+						flag = false
+					}
+				}
+				if flag {
+					continue
+				}
+				//----------
+				for _, group := range groups {
+					for _, vo := range group.Volumes {
+						if vo == vid {
+							rn[group.Id] = append(rn[group.Id], vid)
+						}
+					}
+				}
+			}
+			beego.Info("rn info:", rn)
+
+			//add recover
+			for k, v := range rr {
+				rvids, ok := rn[k]
+				if ok && len(rvids) >= MAX_RECOVER {
+					continue
+				}
+				i := 0
+				recover_nums := MAX_RECOVER - len(rvids)
+				for _, rvid := range v {
+					if i == recover_nums-1 {
+						break
+					}
+					beego.Info("i,num", i, recover_nums-1)
+					vol := volumes[rvid]
+					beego.Info("recover vol:", rvid)
+					if len(vol.StoreIds) == len(vol.Badstoreids) {
+						beego.Error(rvid, " all replicate are failed")
+						continue
+					}
+					var srcid string
+					for _, srcid = range vol.StoreIds {
+						if len(vol.Badstoreids) == 1 {
+							if srcid != vol.Badstoreids[0] {
+								break
+							}
+						}
+						if len(vol.Badstoreids) == 2 {
+							if srcid != vol.Badstoreids[0] && srcid != vol.Badstoreids[1] {
+								break
+							}
+						}
+					}
+
+					srcStore := stores[srcid]
+					destStore := stores[vol.Badstoreids[0]]
+					if _, fv, _, err := destStore.Sinfo(); err != nil || fv <= 0 {
+						beego.Info("get dest store err", err)
+						continue
+					}
+					//	beego.Error("do recover ")
+					if err = o.RecoverVolume(srcStore.Rebalance, destStore.Rack, destStore.Id, rvid); err != nil {
+						beego.Info("do recover err ", err)
+						continue
+					}
+					i++
+				}
+				//rn[k] = append(rn[k], v[0])
+			}
+
+			select {
+			case <-time.After(30 * time.Second):
+				beego.Info("do recover...")
+				break
+			}
 		}
 	}
-}
 */
 func (o *Ops) DoFailRecover() {
 	var (
@@ -918,9 +918,13 @@ func (o *Ops) RecoveryStatus() (items []*RecoveryItem, err error) {
 	return
 }
 
-/**********************
+/*
+*********************
+
 	rebalance
-**********************/
+
+*********************
+*/
 func (o *Ops) RebalanceStatus() (status string, err error) {
 	status, err = o.zk.RebalanceStatus()
 	return
@@ -947,9 +951,13 @@ func (o *Ops) RebalanceVids() (rebalanceVs []*zk.RebalanceVid, err error) {
 	return
 }
 
-/*********************
+/*
+********************
+
 	common
-*********************/
+
+********************
+*/
 func DelSlcElem(s []string, e string) (ss []string) {
 	var index int = -1
 	for i, v := range s {

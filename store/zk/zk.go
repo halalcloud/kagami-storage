@@ -1,14 +1,14 @@
 package zk
 
 import (
-	"efs/libs/meta"
-	"efs/store/conf"
 	"encoding/json"
+	"kagamistoreage/libs/meta"
+	"kagamistoreage/store/conf"
 	"path"
 	"strconv"
 	"strings"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 
 	myzk "github.com/samuel/go-zookeeper/zk"
 )
@@ -117,7 +117,7 @@ func (z *Zookeeper) AddVolume(id int32, data []byte) (err error) {
 	return
 }
 
-//Add zookeeper volume/store
+// Add zookeeper volume/store
 func (z *Zookeeper) AddVolStore(vid int32) (err error) {
 	var (
 		data  []byte
@@ -207,7 +207,7 @@ func (z *Zookeeper) SetRecoveryMovestat(vid int32, deststoreid string, status *m
 	return
 }
 
-//set zookeeper /rebalance/vid/store  move status
+// set zookeeper /rebalance/vid/store  move status
 func (z *Zookeeper) SetVolMovestat(vid int32, status *meta.StoreInfo) (err error) {
 	var (
 		stat  *myzk.Stat

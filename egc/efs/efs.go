@@ -2,13 +2,13 @@ package efs
 
 import (
 	"bytes"
-	"efs/egc/conf"
-	"efs/libs/errors"
-	"efs/libs/meta"
 	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
+	"kagamistoreage/egc/conf"
+	"kagamistoreage/libs/errors"
+	"kagamistoreage/libs/meta"
 	"math/rand"
 	"mime/multipart"
 	"net"
@@ -18,7 +18,7 @@ import (
 	"strings"
 	"time"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 )
 
 const (

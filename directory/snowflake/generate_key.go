@@ -2,7 +2,7 @@ package snowflake
 
 import (
 	"errors"
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 	"time"
 )
 

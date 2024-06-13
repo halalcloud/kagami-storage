@@ -2,24 +2,25 @@ package controllers
 
 import (
 	"crypto/md5"
-	"efs/gops/models/almrec"
-	"efs/gops/models/global"
-	"efs/gops/models/oplog"
-	"efs/gops/models/ops"
-	"efs/gops/models/sstat"
-	"efs/gops/models/types"
-	"efs/gops/models/user"
 	"encoding/hex"
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/astaxie/beego"
 	"io/ioutil"
+	"kagamistoreage/gops/models/almrec"
+	"kagamistoreage/gops/models/global"
+	"kagamistoreage/gops/models/oplog"
+	"kagamistoreage/gops/models/ops"
+	"kagamistoreage/gops/models/sstat"
+	"kagamistoreage/gops/models/types"
+	"kagamistoreage/gops/models/user"
 	"net/http"
 	"sort"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/astaxie/beego"
 )
 
 type ApiController struct {
@@ -482,7 +483,7 @@ func (c *ApiController) GetStoreDelay() {
 	return
 }
 
-//group resp type
+// group resp type
 type respGroup struct {
 	Id              uint64   `json:"id"`
 	StoreIps        []string `json:"store_ips"`
@@ -794,7 +795,7 @@ func (c *ApiController) DelGroup() {
 	return
 }
 
-//volume resp type
+// volume resp type
 type respVolume struct {
 	Id          uint64   `json:"id"`
 	StoreIps    []string `json:"store_ips"`
@@ -1298,9 +1299,13 @@ func (c *ApiController) RecoverStatus() {
 	c.responseOk(respM)
 }
 
-/***********************
+/*
+**********************
+
 	oplog
-***********************/
+
+**********************
+*/
 func (c *ApiController) GetOpLog() {
 	c.pre()
 	if !c.islogin() {
@@ -1341,9 +1346,13 @@ func (c *ApiController) GetOpLog() {
 	c.responseOk(respMs)
 }
 
-/***********************
+/*
+**********************
+
 	almrec
-***********************/
+
+**********************
+*/
 func (c *ApiController) GetAlmRec() {
 	c.pre()
 	if !c.islogin() {
@@ -1392,9 +1401,13 @@ func (c *ApiController) GetAlmRec() {
 	c.responseOk(respMs)
 }
 
-/**********************
+/*
+*********************
+
 	user
-**********************/
+
+*********************
+*/
 func (c *ApiController) GetUser() {
 	c.pre()
 	if !c.islogin() {
@@ -1791,9 +1804,13 @@ func (c *ApiController) ModifyUser() {
 	return
 }
 
-/**********************
+/*
+*********************
+
 	rebalance
-**********************/
+
+*********************
+*/
 const (
 	move_ready   = 0
 	moving       = 1
@@ -2036,9 +2053,13 @@ func (c *ApiController) RebalanceFinish() {
 	c.responseOk("ok")
 }
 
-/**********************
+/*
+*********************
+
 	common
-**********************/
+
+*********************
+*/
 func (c *ApiController) responseError(err error, statusCode int32) {
 	res := make(map[string]interface{})
 	res["success"] = false
@@ -2113,7 +2134,7 @@ func (c *ApiController) isAdmin() bool {
 	return true
 }
 
-//oplog
+// oplog
 func (c *ApiController) addOpLog(detail string) {
 	token := c.GetString("token")
 	uidtime := user.LoginUsers[token]
@@ -2185,7 +2206,7 @@ func calVolume(space string) (num uint64, err error) {
 	return
 }
 
-//is slice repeat
+// is slice repeat
 func isSRept(s []string) (repeat bool) {
 	var m map[string]int = make(map[string]int)
 	for k, v := range s {
@@ -2198,7 +2219,7 @@ func isSRept(s []string) (repeat bool) {
 	return false
 }
 
-//group, volume capacity unit exchange
+// group, volume capacity unit exchange
 func unitExchange(space uint64) (strSpace string, isFull bool) {
 	const Byte = 1
 	const KB = 1024 * Byte

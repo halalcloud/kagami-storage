@@ -2,11 +2,6 @@ package main
 
 import (
 	"crypto/sha1"
-	"efs/libs/errors"
-	"efs/libs/meta"
-	"efs/proxy/bucket"
-	"efs/proxy/conf"
-	"efs/proxy/efs"
 	"encoding/base64"
 	"encoding/hex"
 	"encoding/json"
@@ -14,6 +9,11 @@ import (
 	"hash/crc32"
 	"io"
 	"io/ioutil"
+	"kagamistoreage/libs/errors"
+	"kagamistoreage/libs/meta"
+	"kagamistoreage/proxy/bucket"
+	"kagamistoreage/proxy/conf"
+	"kagamistoreage/proxy/efs"
 	"math"
 	"mime/multipart"
 	"net/http"
@@ -23,7 +23,7 @@ import (
 	"strings"
 	"time"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 )
 
 const (
@@ -175,7 +175,6 @@ func (s *server) downloadDirect(ekey, bucket, file string, wr http.ResponseWrite
 	return
 }
 
-//
 func (s *server) downloadSlice(ekey, bucket, file string, wr http.ResponseWriter, r *http.Request) {
 	var (
 		ranges string
@@ -299,7 +298,7 @@ func (s *server) upload(wr http.ResponseWriter, r *http.Request) {
 	}
 }
 
-//upload dispatcher
+// upload dispatcher
 func (s *server) uploadDispatcher(wr http.ResponseWriter, ekey string, lastVid int32,
 	overWriteFlag, replication int) (res *meta.Response, err error) {
 	var (
@@ -334,7 +333,7 @@ func (s *server) uploadDispatcher(wr http.ResponseWriter, ekey string, lastVid i
 	return
 }
 
-//directly upload file.
+// directly upload file.
 func (s *server) uploadDirect(ekey, bucket, filename string, overWriteFlag, replication int, wr http.ResponseWriter, r *http.Request) {
 	var (
 		ok        bool
@@ -452,7 +451,7 @@ func (s *server) uploadDirect(ekey, bucket, filename string, overWriteFlag, repl
 	return
 }
 
-//upload slice file
+// upload slice file
 func (s *server) uploadSlice(ekey, bucket, filename string, overWriteFlag, replication int, wr http.ResponseWriter, r *http.Request) {
 	var (
 		mime      string
@@ -506,7 +505,7 @@ func (s *server) uploadSlice(ekey, bucket, filename string, overWriteFlag, repli
 	return
 }
 
-//slice mkblk
+// slice mkblk
 func (s *server) sliceMkblk(ekey, mime string, overWriteFlag, replication int, wr http.ResponseWriter,
 	r *http.Request, file io.Reader) (ctx, id string,
 	offset int64, status int, finish bool, err error) {
@@ -601,7 +600,7 @@ func (s *server) sliceMkblk(ekey, mime string, overWriteFlag, replication int, w
 	return
 }
 
-//slice bput
+// slice bput
 func (s *server) sliceBput(ekey, ctx, id, mime string, offset int64, overWriteFlag, replication int,
 	wr http.ResponseWriter, r *http.Request, file io.Reader) (nctx string, noffset int64, finish bool, status int, err error) {
 	var (
@@ -698,7 +697,7 @@ func (s *server) sliceBput(ekey, ctx, id, mime string, offset int64, overWriteFl
 	return
 }
 
-//slice mkfile
+// slice mkfile
 func (s *server) sliceMkfile(ekey, bucket, file string, oFileSize *int64, mime, id string, filesize int64, buf string,
 	overWriteFlag int, wr http.ResponseWriter, r *http.Request) (status int, err error) {
 	var (
@@ -886,7 +885,7 @@ func (s *server) mkblk(wr http.ResponseWriter, r *http.Request) {
 	return
 }
 
-//bput file.
+// bput file.
 func (s *server) bput(wr http.ResponseWriter, r *http.Request) {
 	var (
 		ekey          string
@@ -1042,7 +1041,7 @@ func (s *server) bput(wr http.ResponseWriter, r *http.Request) {
 	return
 }
 
-//make file.
+// make file.
 func (s *server) mkfile(wr http.ResponseWriter, r *http.Request) {
 	var (
 		ekey          string
@@ -1831,7 +1830,7 @@ func (s *server) bcreate(wr http.ResponseWriter, r *http.Request) {
 	}
 }
 
-//rename bucket
+// rename bucket
 func (s *server) brename(wr http.ResponseWriter, r *http.Request) {
 	var (
 		bucket_src string
@@ -1902,7 +1901,7 @@ func (s *server) brename(wr http.ResponseWriter, r *http.Request) {
 	}
 }
 
-//delete bucket
+// delete bucket
 func (s *server) bdelete(wr http.ResponseWriter, r *http.Request) {
 	var (
 		bucket    string
@@ -1954,7 +1953,7 @@ func (s *server) bdelete(wr http.ResponseWriter, r *http.Request) {
 	}
 }
 
-//list bucket
+// list bucket
 func (s *server) blist(wr http.ResponseWriter, r *http.Request) {
 	var (
 		status    = http.StatusOK
@@ -2014,7 +2013,7 @@ func (s *server) blist(wr http.ResponseWriter, r *http.Request) {
 	}
 }
 
-//bucket stat
+// bucket stat
 func (s *server) bstat(wr http.ResponseWriter, r *http.Request) {
 	var (
 		bucket    string
@@ -2069,7 +2068,7 @@ func (s *server) bstat(wr http.ResponseWriter, r *http.Request) {
 	}
 }
 
-//batch
+// batch
 func (s *server) batch(wr http.ResponseWriter, r *http.Request) {
 	const DLMT = ":"
 	var (
@@ -2387,7 +2386,7 @@ func (s *server) batch(wr http.ResponseWriter, r *http.Request) {
 	wr.Write(data)
 }
 
-//bucket create error response
+// bucket create error response
 func buktCrtErrResp(wr http.ResponseWriter, status int, errCode int, errMsg string) {
 	var (
 		respErr meta.PBCreateRetFailed
@@ -2408,7 +2407,7 @@ func buktCrtErrResp(wr http.ResponseWriter, status int, errCode int, errMsg stri
 	return
 }
 
-//bucket rname error response
+// bucket rname error response
 func buktRnmErrResp(wr http.ResponseWriter, status int, errCode int, errMsg string) {
 	var (
 		respErr meta.PBRenameRetFailed
@@ -2429,7 +2428,7 @@ func buktRnmErrResp(wr http.ResponseWriter, status int, errCode int, errMsg stri
 	return
 }
 
-//bucket delete error response
+// bucket delete error response
 func buktDelErrResp(wr http.ResponseWriter, status int, errCode int, errMsg string) {
 	var (
 		respErr meta.PBDeleteRetFailed
@@ -2450,7 +2449,7 @@ func buktDelErrResp(wr http.ResponseWriter, status int, errCode int, errMsg stri
 	return
 }
 
-//bucket list error response
+// bucket list error response
 func buktListErrResp(wr http.ResponseWriter, status int, errCode int, errMsg string) {
 	var (
 		respErr meta.PBListRetFailed
@@ -2471,7 +2470,7 @@ func buktListErrResp(wr http.ResponseWriter, status int, errCode int, errMsg str
 	return
 }
 
-//bucket stat error response
+// bucket stat error response
 func buktStatErrResp(wr http.ResponseWriter, status int, errCode int, errMsg string) {
 	var (
 		respErr meta.PBStatRetFailed
@@ -2492,7 +2491,7 @@ func buktStatErrResp(wr http.ResponseWriter, status int, errCode int, errMsg str
 	return
 }
 
-//resource list error response
+// resource list error response
 func rListErrResp(wr http.ResponseWriter, status int, errCode int, errMsg string) {
 	var (
 		respErr meta.PFListFailed
@@ -2513,7 +2512,7 @@ func rListErrResp(wr http.ResponseWriter, status int, errCode int, errMsg string
 	return
 }
 
-//resource metadata modify error response
+// resource metadata modify error response
 func rMetaModifyErrResp(wr http.ResponseWriter, status int, errCode int, errMsg string) {
 	var (
 		respErr meta.PFStatChgFailed
@@ -2534,7 +2533,7 @@ func rMetaModifyErrResp(wr http.ResponseWriter, status int, errCode int, errMsg 
 	return
 }
 
-//resource copy error response
+// resource copy error response
 func rCopyErrResp(wr http.ResponseWriter, status int, errCode int, errMsg string) {
 	var (
 		respErr meta.PFCopyFailed
@@ -2555,7 +2554,7 @@ func rCopyErrResp(wr http.ResponseWriter, status int, errCode int, errMsg string
 	return
 }
 
-//resource move error response
+// resource move error response
 func rMoveErrResp(wr http.ResponseWriter, status int, errCode int, errMsg string) {
 	var (
 		respErr meta.PFMvFailed
@@ -2576,7 +2575,7 @@ func rMoveErrResp(wr http.ResponseWriter, status int, errCode int, errMsg string
 	return
 }
 
-//resource stat error response
+// resource stat error response
 func rStatErrResp(wr http.ResponseWriter, status int, errCode int, errMsg string) {
 	var (
 		respErr meta.PFStatFailed
@@ -2597,7 +2596,7 @@ func rStatErrResp(wr http.ResponseWriter, status int, errCode int, errMsg string
 	return
 }
 
-//resource delete error response
+// resource delete error response
 func rDelErrResp(wr http.ResponseWriter, status int, errCode int, errMsg string) {
 	var (
 		respErr meta.PFDelFailed
@@ -2618,7 +2617,7 @@ func rDelErrResp(wr http.ResponseWriter, status int, errCode int, errMsg string)
 	return
 }
 
-//resource upload make block error response
+// resource upload make block error response
 func rMakeBlkErrResp(wr http.ResponseWriter, status int, errCode int, errMsg string) {
 	var (
 		respErr meta.PMkblkRetFailed
@@ -2640,7 +2639,7 @@ func rMakeBlkErrResp(wr http.ResponseWriter, status int, errCode int, errMsg str
 	return
 }
 
-//resource upload  block slice error response
+// resource upload  block slice error response
 func rBlkSliceErrResp(wr http.ResponseWriter, status int, errCode int, errMsg string) {
 	var (
 		respErr meta.PBputRetFailed
@@ -2661,7 +2660,7 @@ func rBlkSliceErrResp(wr http.ResponseWriter, status int, errCode int, errMsg st
 	return
 }
 
-//resource upload make file error response
+// resource upload make file error response
 func rMakeFileErrResp(wr http.ResponseWriter, status int, errCode int, errMsg string) {
 	var (
 		respErr meta.PMkfileRetFailed
@@ -2683,7 +2682,7 @@ func rMakeFileErrResp(wr http.ResponseWriter, status int, errCode int, errMsg st
 	return
 }
 
-//resource upload error response
+// resource upload error response
 func rUploadErrResp(wr http.ResponseWriter, status int, errCode int, errMsg string) {
 	var (
 		respErr meta.PFUploadFailed

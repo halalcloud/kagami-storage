@@ -2,22 +2,23 @@ package gos
 
 import (
 	"crypto/sha1"
-	"ecloud_gosdk.v1/conf"
-	"ecloud_gosdk.v1/ecloud"
-	"ecloud_gosdk.v1/ecloudcli"
-	bkt "efs/gos_sync/bucket"
-	"efs/gos_sync/libs/httpcli"
-	"efs/gos_sync/task"
-	log "efs/log/glog"
 	b64 "encoding/base64"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io/ioutil"
+	bkt "kagamistoreage/gos_sync/bucket"
+	"kagamistoreage/gos_sync/libs/httpcli"
+	"kagamistoreage/gos_sync/task"
+	log "kagamistoreage/log/glog"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
+
+	"ecloud_gosdk.v1/conf"
+	"ecloud_gosdk.v1/ecloud"
+	"ecloud_gosdk.v1/ecloudcli"
 )
 
 const (
@@ -78,7 +79,7 @@ type recordItem struct {
 	Ekey    string
 }
 
-//work with i task chan
+// work with i task chan
 func (g *Gos) work(i int) {
 	var (
 		ekey, op, param string
@@ -231,8 +232,8 @@ func (g *Gos) work(i int) {
 	} //for{}
 }
 
-//upload fetch prefetch
-//da deleteafter
+// upload fetch prefetch
+// da deleteafter
 func (g *Gos) uploadParse(param string) (dekey, ubucket, file string, size int64, da int, err error) {
 	var (
 		data        []byte
@@ -273,7 +274,7 @@ func (g *Gos) uploadParse(param string) (dekey, ubucket, file string, size int64
 	return
 }
 
-//sekey is master cluster ekey
+// sekey is master cluster ekey
 func (g *Gos) upload(param, sekey string) (err error, errCode int) {
 	var (
 		dekey, bucket, ubucket, file, durl string
@@ -825,7 +826,7 @@ func (g *Gos) bdelete(param string) (err error) {
 	return
 }
 
-//upload exception
+// upload exception
 func (g *Gos) uploadException(ekey string) (err error) {
 	var (
 		errCode                   int
@@ -901,7 +902,7 @@ func (g *Gos) uploadException(ekey string) (err error) {
 	return
 }
 
-//task finish
+// task finish
 func (g *Gos) taskFinish(ekey, op, param string, addTime int64, op_stat string) {
 	var (
 		doc      *task.FinishItem
@@ -923,7 +924,7 @@ func (g *Gos) taskFinish(ekey, op, param string, addTime int64, op_stat string) 
 	return
 }
 
-//hash genvalue
+// hash genvalue
 func genValue(s string) uint32 {
 	var (
 		bs []byte

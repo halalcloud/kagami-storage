@@ -1,12 +1,12 @@
 package types
 
 import (
-	"efs/libs/errors"
-	"efs/libs/meta"
-	"efs/libs/stat"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"kagamistoreage/libs/errors"
+	"kagamistoreage/libs/meta"
+	"kagamistoreage/libs/stat"
 	"net/http"
 
 	"github.com/astaxie/beego"
@@ -123,21 +123,21 @@ func (s *Store) Sinfo() (vs []*meta.Volume, fvs int, info *stat.Info, err error)
 	return
 }
 
-//store sort by id
+// store sort by id
 type StorebyId []*Store
 
 func (s StorebyId) Len() int           { return len(s) }
 func (s StorebyId) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
 func (s StorebyId) Less(i, j int) bool { return s[i].Id < s[j].Id }
 
-//group sort by id
+// group sort by id
 type GroupbyId []*Group
 
 func (g GroupbyId) Len() int           { return len(g) }
 func (g GroupbyId) Swap(i, j int)      { g[i], g[j] = g[j], g[i] }
 func (g GroupbyId) Less(i, j int) bool { return g[i].Id < g[j].Id }
 
-//volume sort by id
+// volume sort by id
 type VolumebyId []*Volume
 
 func (v VolumebyId) Len() int           { return len(v) }

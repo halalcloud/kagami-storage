@@ -3,11 +3,12 @@ package main
 import (
 	// "bytes"
 	// "crypto/sha1"
-	"efs/egc/conf"
-	"efs/egc/efs"
-	"efs/libs/errors"
-	"efs/libs/meta"
 	"encoding/base64"
+	"kagamistoreage/egc/conf"
+	"kagamistoreage/egc/efs"
+	"kagamistoreage/libs/errors"
+	"kagamistoreage/libs/meta"
+
 	// "encoding/hex"
 	// "encoding/json"
 	// "hash/crc32"
@@ -18,7 +19,7 @@ import (
 	// "path"
 	"strconv"
 	// "strings"
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 	//"fmt"
 	"time"
 )
@@ -183,7 +184,7 @@ func (s *server) destory_needle_to_store(dfile *meta.DestroyFile) (continu bool)
 
 }
 
-//encapsulation func
+// encapsulation func
 func DestoryBucketfile(s *server, ekey, bucket, bucketType string) (err error) {
 	var (
 		marker string

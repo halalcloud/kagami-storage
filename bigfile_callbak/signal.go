@@ -1,7 +1,7 @@
 package main
 
 import (
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 	"os"
 	"os/signal"
 	"syscall"

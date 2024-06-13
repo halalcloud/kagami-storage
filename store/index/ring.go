@@ -1,7 +1,7 @@
 package index
 
 import (
-	"efs/libs/errors"
+	"kagamistoreage/libs/errors"
 )
 
 type Ring struct {

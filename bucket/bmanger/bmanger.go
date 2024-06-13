@@ -1,16 +1,17 @@
 package bmanger
 
 import (
-	"efs/bucket/database"
-	"efs/libs/errors"
+	"kagamistoreage/bucket/database"
+	"kagamistoreage/libs/errors"
+
 	//"fmt"
-	"efs/bucket/global"
+	"kagamistoreage/bucket/global"
 	//"net/url"
-	"efs/libs/meta"
+	"kagamistoreage/libs/meta"
 	"sync"
 	"time"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 )
 
 type Buckets struct {
@@ -442,6 +443,7 @@ func (b *Buckets) getbitembyuserdnsname(userdnsname string) (ritem *Item, err er
 
 /*
 Uid            int    `json:"uid"`
+
 	Bname          string `json:"bname"`
 	RegionId       int    `json:"regionid"`
 	Keysecret      string `json:"keysecret"`

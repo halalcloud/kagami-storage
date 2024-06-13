@@ -1,10 +1,10 @@
 package zk
 
 import (
-	"efs/gops/models/global"
-	"efs/gops/models/types"
-	"efs/libs/meta"
 	"encoding/json"
+	"kagamistoreage/gops/models/global"
+	"kagamistoreage/gops/models/types"
+	"kagamistoreage/libs/meta"
 	"strconv"
 	"strings"
 	"time"
@@ -491,9 +491,13 @@ func (z *ZooKeeper) RecoveryStat(vid, sid string) (rStat *Recoverystat, err erro
 	return
 }
 
-/********************
+/*
+*******************
+
 	rabalance
-********************/
+
+*******************
+*/
 func (z *ZooKeeper) RebalanceStatus() (status string, err error) {
 	var (
 		data     []byte

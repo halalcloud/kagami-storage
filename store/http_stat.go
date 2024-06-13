@@ -1,18 +1,18 @@
 package main
 
 import (
-	"efs/libs/errors"
-	"efs/libs/meta"
-	"efs/libs/stat"
-	"efs/store/volume"
 	"encoding/json"
 	"fmt"
+	"kagamistoreage/libs/errors"
+	"kagamistoreage/libs/meta"
+	"kagamistoreage/libs/stat"
+	"kagamistoreage/store/volume"
 	"net/http"
 	"os/exec"
 	"strings"
 	"time"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 )
 
 const (

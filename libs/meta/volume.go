@@ -1,6 +1,6 @@
 package meta
 
-import "efs/libs/stat"
+import "kagamistoreage/libs/stat"
 
 type Volume struct {
 	Id          int32       `json:"id"`

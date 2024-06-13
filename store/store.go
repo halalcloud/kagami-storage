@@ -1,14 +1,14 @@
 package main
 
 import (
-	"efs/libs/errors"
-	"efs/libs/meta"
-	"efs/store/conf"
-	myos "efs/store/os"
-	"efs/store/volume"
-	myzk "efs/store/zk"
 	"fmt"
 	"io/ioutil"
+	"kagamistoreage/libs/errors"
+	"kagamistoreage/libs/meta"
+	"kagamistoreage/store/conf"
+	myos "kagamistoreage/store/os"
+	"kagamistoreage/store/volume"
+	myzk "kagamistoreage/store/zk"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -16,19 +16,19 @@ import (
 	"sync"
 	"time"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 )
 
 // Store get all volume meta data from a index file. index contains volume id,
 // volume file path, the super block file index ends with ".idx" if the super
-// block is /efs/super_block_1, then the super block index file is
-// /efs/super_block_1.idx.
+// block is /kagamistoreage/super_block_1, then the super block index file is
+// /kagamistoreage/super_block_1.idx.
 //
 // volume index file format:
 //  ---------------------------------
 // | block_path,index_path,volume_id |
-// | /efs/block_1,/efs/block_1.idx\n |
-// | /efs/block_2,/efs/block_2.idx\n |
+// | /kagamistoreage/block_1,/kagamistoreage/block_1.idx\n |
+// | /kagamistoreage/block_2,/kagamistoreage/block_2.idx\n |
 //  ---------------------------------
 //
 // store -> N volumes
@@ -297,7 +297,7 @@ func (s *Store) parseRecoveryIndex() (err error) {
 
 }
 
-//parse rebalance movedestVolindex
+// parse rebalance movedestVolindex
 func (s *Store) parseMoveDestVolIndex() (err error) {
 	var (
 		i     int

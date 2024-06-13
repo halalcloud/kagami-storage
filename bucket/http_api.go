@@ -1,23 +1,25 @@
 package main
 
 import (
-	"efs/bucket/auth"
-	"efs/bucket/bmanger"
-	"efs/bucket/conf"
-	"efs/bucket/database"
-	"efs/bucket/global"
-	"efs/bucket/rmanger"
-	"efs/libs/meta"
+	"kagamistoreage/bucket/auth"
+	"kagamistoreage/bucket/bmanger"
+	"kagamistoreage/bucket/conf"
+	"kagamistoreage/bucket/database"
+	"kagamistoreage/bucket/global"
+	"kagamistoreage/bucket/rmanger"
+	"kagamistoreage/libs/meta"
+
 	//"io"
 	"io/ioutil"
 	"net/http"
+
 	//"os"
 	//"path"
 	"bytes"
-	"efs/libs/errors"
 	b64 "encoding/base64"
 	"encoding/json"
 	"fmt"
+	"kagamistoreage/libs/errors"
 	"net"
 	"net/url"
 	"strconv"
@@ -26,7 +28,7 @@ import (
 
 	itime "github.com/Terry-Mao/marmot/time"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 )
 
 const (

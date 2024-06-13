@@ -1,9 +1,9 @@
 package main
 
 import (
-	"efs/bigfile_callbak/conf"
-	log "efs/log/glog"
 	"flag"
+	"kagamistoreage/bigfile_callbak/conf"
+	log "kagamistoreage/log/glog"
 	"runtime"
 )
 

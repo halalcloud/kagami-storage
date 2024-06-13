@@ -1,9 +1,9 @@
 package db
 
 import (
-	"efs/bigfile_callbak/conf"
+	"kagamistoreage/bigfile_callbak/conf"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 	//"fmt"
 
 	"gopkg.in/mgo.v2"

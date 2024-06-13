@@ -1,12 +1,12 @@
 package main
 
 import (
-	"efs/gos_sync/bucket"
-	"efs/gos_sync/conf"
-	"efs/gos_sync/gos"
-	"efs/gos_sync/task"
-	log "efs/log/glog"
 	"flag"
+	"kagamistoreage/gos_sync/bucket"
+	"kagamistoreage/gos_sync/conf"
+	"kagamistoreage/gos_sync/gos"
+	"kagamistoreage/gos_sync/task"
+	log "kagamistoreage/log/glog"
 	"os"
 	"os/signal"
 	"syscall"

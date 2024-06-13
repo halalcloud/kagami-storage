@@ -1,10 +1,10 @@
 package main
 
 import (
-	"efs/store/needle"
-	"efs/store/volume"
-	"efs/store/zk"
 	"bytes"
+	"kagamistoreage/store/needle"
+	"kagamistoreage/store/volume"
+	"kagamistoreage/store/zk"
 	"os"
 	"testing"
 )

@@ -3,20 +3,20 @@ package hbase
 import (
 	"bytes"
 	"crypto/sha1"
-	"efs/directory/hbase/hbasethrift"
-	"efs/libs/errors"
-	"efs/libs/meta"
-	"efs/libs/types"
 	"encoding/base64"
 	"encoding/binary"
 	"encoding/hex"
 	"fmt"
+	"kagamistoreage/directory/hbase/hbasethrift"
+	"kagamistoreage/libs/errors"
+	"kagamistoreage/libs/meta"
+	"kagamistoreage/libs/types"
 	"reflect"
 	"strconv"
 	"strings"
 	"time"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 )
 
 const (
@@ -140,7 +140,7 @@ func (h *HBaseClient) GetFileStat(bucket, filename string) (f *meta.File, err er
 	return
 }
 
-//Uptate file mime into hbase
+// Uptate file mime into hbase
 func (h *HBaseClient) UpdateMime(bucket string, f *meta.File) (err error) {
 	if err = h.updateFileMime(bucket, f); err != nil {
 		return
@@ -148,7 +148,7 @@ func (h *HBaseClient) UpdateMime(bucket string, f *meta.File) (err error) {
 	return
 }
 
-//Uptate file expire into hbase
+// Uptate file expire into hbase
 func (h *HBaseClient) UpdateExp(bucket string, f *meta.File) (err error) {
 	if err = h.updateFileExp(bucket, f); err != nil {
 		return
@@ -156,7 +156,7 @@ func (h *HBaseClient) UpdateExp(bucket string, f *meta.File) (err error) {
 	return
 }
 
-//List row in expire table
+// List row in expire table
 func (h *HBaseClient) ListExpire(limit, marker string) (el *meta.ExpireList, err error) {
 	var (
 		c         *hbasethrift.THBaseServiceClient
@@ -260,7 +260,7 @@ func (h *HBaseClient) ListExpire(limit, marker string) (el *meta.ExpireList, err
 	return el, nil
 }
 
-//Put file expire into hbase expire table
+// Put file expire into hbase expire table
 func (h *HBaseClient) PutExpire(filename string, expire int64) (err error) {
 	var (
 		ks       []byte
@@ -307,7 +307,7 @@ func (h *HBaseClient) PutExpire(filename string, expire int64) (err error) {
 	return
 }
 
-//delete expire in hbase expire table
+// delete expire in hbase expire table
 func (h *HBaseClient) DeleteExpire(filename string) (err error) {
 	var (
 		ks []byte
@@ -342,7 +342,7 @@ func (h *HBaseClient) UpdataNeedle(n *meta.Needle) (err error) {
 	return
 }
 
-//Copy
+// Copy
 func (h *HBaseClient) Copy(destbucket string, f *meta.File, n *meta.Needle) (err error) {
 	if err = h.putFile(destbucket, f); err != nil {
 		return
@@ -353,7 +353,7 @@ func (h *HBaseClient) Copy(destbucket string, f *meta.File, n *meta.Needle) (err
 	return
 }
 
-//Move
+// Move
 func (h *HBaseClient) Move(bucket string, filename string, destbucket string, f *meta.File) (err error) {
 	if err = h.putFile(destbucket, f); err != nil {
 		return
@@ -582,7 +582,7 @@ func (h *HBaseClient) DelDestroy(bucket, filename string, link int32) (err error
 	return
 }
 
-//delete file only delete file
+// delete file only delete file
 func (h *HBaseClient) DelFile(bucket, filename string) (err error) {
 	if err = h.delFile(bucket, filename); err != nil {
 		return
@@ -591,7 +591,7 @@ func (h *HBaseClient) DelFile(bucket, filename string) (err error) {
 	return
 }
 
-//delete destroy file only delete file
+// delete destroy file only delete file
 func (h *HBaseClient) DelDestroyFile(bucket, filename string) (err error) {
 	if err = h.delDestroyFile(bucket, filename); err != nil {
 		return
@@ -600,7 +600,7 @@ func (h *HBaseClient) DelDestroyFile(bucket, filename string) (err error) {
 	return
 }
 
-//DelTmpFile del half-baked file meta
+// DelTmpFile del half-baked file meta
 func (h *HBaseClient) DelTmpFile(bucket, filename string, id string) (err error) {
 	var (
 		f *meta.File
@@ -620,7 +620,7 @@ func (h *HBaseClient) DelTmpFile(bucket, filename string, id string) (err error)
 	return
 }
 
-//DelOneSlice del file key meta, and needle meta
+// DelOneSlice del file key meta, and needle meta
 func (h *HBaseClient) DelOneSlice(bucket, filename string, id string) (err error) {
 	var (
 		f    *meta.File
@@ -1004,7 +1004,7 @@ func (h *HBaseClient) GetFile(bucket, filename string) (f *meta.File, err error)
 	return
 }
 
-//is bucket exist
+// is bucket exist
 func (h *HBaseClient) isBucketExist(bucket []byte) (exist bool, err error) {
 	var (
 		c *hbasethrift.THBaseServiceClient
@@ -1024,7 +1024,7 @@ func (h *HBaseClient) isBucketExist(bucket []byte) (exist bool, err error) {
 	return
 }
 
-//is file exist
+// is file exist
 func (h *HBaseClient) isFileExist(bucket []byte, filename []byte) (exist bool, err error) {
 	var (
 		c *hbasethrift.THBaseServiceClient
@@ -1663,7 +1663,7 @@ func (h *HBaseClient) updateTmpFileKey(bucket string, f *meta.File) (err error) 
 	return
 }
 
-//fileToTrash send exist file to trash
+// fileToTrash send exist file to trash
 func (h *HBaseClient) FileToTrash(bucket string, f *meta.File, flag int) (err error) {
 	var (
 		file *meta.File
@@ -2192,12 +2192,12 @@ func (h *HBaseClient) tableName(bucket string) []byte {
 	return []byte(_prefix + bucket)
 }
 
-//destroy tableName name of destroy bucket table
+// destroy tableName name of destroy bucket table
 func (h *HBaseClient) tableDestroyName(bucket string) []byte {
 	return []byte(_prefix_trash + "_" + bucket)
 }
 
-//tableName name of bucket delete
+// tableName name of bucket delete
 func (h *HBaseClient) tableDeleteName(bucket string) []byte {
 	return []byte(_prefix_trash + "_" + bucket + fmt.Sprintf("%d", time.Now().Unix()))
 }
@@ -2213,12 +2213,12 @@ func (h *HBaseClient) setTmpFileName(bucket string, filename string, id string) 
 	return
 }
 
-//tableTrashName table name for trash
+// tableTrashName table name for trash
 func (h *HBaseClient) tableTrashName() []byte {
 	return []byte(_prefix_trash)
 }
 
-//trashFileName set trash file name
+// trashFileName set trash file name
 func (h *HBaseClient) setTrashFileName(bucket string, filename string, key string) (tFilename string) {
 	tFilename = bucket + "/" + filename + "_" + key
 	return

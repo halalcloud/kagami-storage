@@ -1,9 +1,9 @@
 package main
 
 import (
-	"efs/rebalance/conf"
 	"flag"
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
+	"kagamistoreage/rebalance/conf"
 	"runtime"
 )
 

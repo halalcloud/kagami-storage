@@ -3,14 +3,6 @@ package efs
 import (
 	"bytes"
 	"crypto/sha1"
-	"efs/authacess/conf"
-	"efs/authacess/fetch"
-	"efs/authacess/httpcli"
-	"efs/authacess/mimetype"
-	"efs/authacess/multipartupload"
-	"efs/libs/errors"
-	"efs/libs/meta"
-	log "efs/log/glog"
 	b64 "encoding/base64"
 	"encoding/hex"
 	"encoding/json"
@@ -18,6 +10,14 @@ import (
 	"hash/crc32"
 	"io"
 	"io/ioutil"
+	"kagamistoreage/authacess/conf"
+	"kagamistoreage/authacess/fetch"
+	"kagamistoreage/authacess/httpcli"
+	"kagamistoreage/authacess/mimetype"
+	"kagamistoreage/authacess/multipartupload"
+	"kagamistoreage/libs/errors"
+	"kagamistoreage/libs/meta"
+	log "kagamistoreage/log/glog"
 	"math/rand"
 	"mime/multipart"
 	"os"
@@ -664,56 +664,56 @@ func (b *Efs) Upload(bucket, filename, content string, repeat_flag, replication,
 }
 
 /*
-func (b *Efs) Upload(bucket, filname, content string, repeat_flag int, fpart io.Reader) (hash, key string, retcode int, errstring string) {
-	var (
-		ekey, uri string
-		params    = url.Values{}
-		header    = url.Values{}
-		code      int
-		err       error
-		rebody    []byte
-		ures      upload_res
-		errres    proxy_errres
-	)
-	retcode = 200
-	uri = fmt.Sprintf(_proxy_upload, b.c.ProxyAddr)
-	ekey = fmt.Sprintf("%s:%s", bucket, filname)
-	b64ekey := b64.URLEncoding.EncodeToString([]byte(ekey))
-	header.Set("ekey", b64ekey)
-	//	header.Set("Content-Type", content)
-	header.Set("overwrite", fmt.Sprintf("%d", repeat_flag))
-	//fmt.Println("-------", repeat_flag)
-	rebody, err, code = Http_upload("POST", uri, params, header, fpart)
-	if err != nil {
-		retcode = 401
-		errstring = "server failed"
-		return
-	} else {
-		if code == http.StatusOK {
-			if err = json.Unmarshal(rebody, &ures); err != nil {
-				log.Errorf("json unmarshl failed ")
-				retcode = 401
-				errstring = "server failed"
-				return
-			}
-			retcode = 200
-			hash = ures.Hash
-			key = ures.Key
+	func (b *Efs) Upload(bucket, filname, content string, repeat_flag int, fpart io.Reader) (hash, key string, retcode int, errstring string) {
+		var (
+			ekey, uri string
+			params    = url.Values{}
+			header    = url.Values{}
+			code      int
+			err       error
+			rebody    []byte
+			ures      upload_res
+			errres    proxy_errres
+		)
+		retcode = 200
+		uri = fmt.Sprintf(_proxy_upload, b.c.ProxyAddr)
+		ekey = fmt.Sprintf("%s:%s", bucket, filname)
+		b64ekey := b64.URLEncoding.EncodeToString([]byte(ekey))
+		header.Set("ekey", b64ekey)
+		//	header.Set("Content-Type", content)
+		header.Set("overwrite", fmt.Sprintf("%d", repeat_flag))
+		//fmt.Println("-------", repeat_flag)
+		rebody, err, code = Http_upload("POST", uri, params, header, fpart)
+		if err != nil {
+			retcode = 401
+			errstring = "server failed"
 			return
 		} else {
-			if err = json.Unmarshal(rebody, &errres); err != nil {
-				log.Errorf("json unmarshl failed ")
-				retcode = 401
-				errstring = "server failed"
+			if code == http.StatusOK {
+				if err = json.Unmarshal(rebody, &ures); err != nil {
+					log.Errorf("json unmarshl failed ")
+					retcode = 401
+					errstring = "server failed"
+					return
+				}
+				retcode = 200
+				hash = ures.Hash
+				key = ures.Key
+				return
+			} else {
+				if err = json.Unmarshal(rebody, &errres); err != nil {
+					log.Errorf("json unmarshl failed ")
+					retcode = 401
+					errstring = "server failed"
+					return
+				}
+				retcode = errres.Code
+				errstring = errres.Error
 				return
 			}
-			retcode = errres.Code
-			errstring = errres.Error
-			return
-		}
 
-	}
-	return
+		}
+		return
 
 }
 */
@@ -1204,99 +1204,99 @@ func (b *Efs) bputtodirectory(ekey, ctx string, id string, offset int64, mime st
 }
 
 /*
-func (b *Efs) Bput(bucket, filename, ctx, id string, offset int64, body []byte, overWriteFlag, replication int) (resbody *Bput_res, retcode int, errstring string) {
-	var (
-		err       error
-		storeRets *meta.StoreRets
-		res       *meta.Response
-		respOK    meta.PBputRetOK
-		ures      Bput_res
-		filesize  int
-	)
+	func (b *Efs) Bput(bucket, filename, ctx, id string, offset int64, body []byte, overWriteFlag, replication int) (resbody *Bput_res, retcode int, errstring string) {
+		var (
+			err       error
+			storeRets *meta.StoreRets
+			res       *meta.Response
+			respOK    meta.PBputRetOK
+			ures      Bput_res
+			filesize  int
+		)
 
-	tekey := bucket + ":" + filename
-	ekey := b64.URLEncoding.EncodeToString([]byte(tekey))
-	retcode, errstring, res, storeRets = b.retryuploadtostore(ekey, overWriteFlag, replication, body, "")
-	if retcode != 200 {
-		return
-	}
-
-	sha := sha1.Sum(body)
-	sha1sum := hex.EncodeToString(sha[:])
-
-	mime := "jpg"
-	filesize = len(body)
-	if respOK, err = b.bputtodirectory(ekey, ctx, id, offset, mime, sha1sum,
-		int64(filesize), res.Key, res.Vid, res.Cookie); err != nil {
-
-		uploadStoredelclean(storeRets, res)
-		retcode, errstring = errortostring(err)
-		return
-	}
-
-	ures.Ctx = respOK.Ctx
-	ures.Host = ""
-	ures.Crc32 = int64(crc32.ChecksumIEEE(body))
-	ures.Checksum = fmt.Sprintf("%d", respOK.Crc32)
-	ures.Offset = respOK.Offset
-
-	retcode = 200
-	resbody = &ures
-
-	return
-}
-
-func (b *Efs) Bput(bucket, filname, ctx, id string, offset int64, body []byte) (resbody *Bput_res, retcode int, errstring string) {
-	var (
-		err    error
-		ures   Bput_res
-		header = url.Values{}
-		params = url.Values{}
-		rebody []byte
-		code   int
-
-		errres proxy_errres
-	)
-	uri := fmt.Sprintf(_proxy_bput, b.c.ProxyAddr)
-	ekey := fmt.Sprintf("%s:%s", bucket, filname)
-	b64ekey := b64.URLEncoding.EncodeToString([]byte(ekey))
-	header.Set("ekey", b64ekey)
-	header.Set("Content-Type", "application/octet-stream")
-	//header.Set("overwrite", fmt.Sprintf("%s", repeat_flag))
-	header.Set("ctx", ctx)
-	header.Set("id", id)
-	header.Set("offset", strconv.FormatInt(offset, 10))
-	rebody, err, code = Http_binary("POST", uri, params, header, body)
-	if err != nil {
-		retcode = 401
-		errstring = "server failed"
-		return
-	} else {
-		if code == http.StatusOK {
-			if err = json.Unmarshal(rebody, &ures); err != nil {
-				log.Errorf("json unmarshl failed ")
-				retcode = 401
-				errstring = "server failed"
-				return
-			}
-			retcode = 200
-			resbody = &ures
-			return
-		} else {
-			if err = json.Unmarshal(rebody, &errres); err != nil {
-				log.Errorf("json unmarshl failed ")
-				retcode = 401
-				errstring = "server failed"
-				return
-			}
-			retcode = errres.Code
-			errstring = errres.Error
+		tekey := bucket + ":" + filename
+		ekey := b64.URLEncoding.EncodeToString([]byte(tekey))
+		retcode, errstring, res, storeRets = b.retryuploadtostore(ekey, overWriteFlag, replication, body, "")
+		if retcode != 200 {
 			return
 		}
 
+		sha := sha1.Sum(body)
+		sha1sum := hex.EncodeToString(sha[:])
+
+		mime := "jpg"
+		filesize = len(body)
+		if respOK, err = b.bputtodirectory(ekey, ctx, id, offset, mime, sha1sum,
+			int64(filesize), res.Key, res.Vid, res.Cookie); err != nil {
+
+			uploadStoredelclean(storeRets, res)
+			retcode, errstring = errortostring(err)
+			return
+		}
+
+		ures.Ctx = respOK.Ctx
+		ures.Host = ""
+		ures.Crc32 = int64(crc32.ChecksumIEEE(body))
+		ures.Checksum = fmt.Sprintf("%d", respOK.Crc32)
+		ures.Offset = respOK.Offset
+
+		retcode = 200
+		resbody = &ures
+
+		return
 	}
-	return
-}
+
+	func (b *Efs) Bput(bucket, filname, ctx, id string, offset int64, body []byte) (resbody *Bput_res, retcode int, errstring string) {
+		var (
+			err    error
+			ures   Bput_res
+			header = url.Values{}
+			params = url.Values{}
+			rebody []byte
+			code   int
+
+			errres proxy_errres
+		)
+		uri := fmt.Sprintf(_proxy_bput, b.c.ProxyAddr)
+		ekey := fmt.Sprintf("%s:%s", bucket, filname)
+		b64ekey := b64.URLEncoding.EncodeToString([]byte(ekey))
+		header.Set("ekey", b64ekey)
+		header.Set("Content-Type", "application/octet-stream")
+		//header.Set("overwrite", fmt.Sprintf("%s", repeat_flag))
+		header.Set("ctx", ctx)
+		header.Set("id", id)
+		header.Set("offset", strconv.FormatInt(offset, 10))
+		rebody, err, code = Http_binary("POST", uri, params, header, body)
+		if err != nil {
+			retcode = 401
+			errstring = "server failed"
+			return
+		} else {
+			if code == http.StatusOK {
+				if err = json.Unmarshal(rebody, &ures); err != nil {
+					log.Errorf("json unmarshl failed ")
+					retcode = 401
+					errstring = "server failed"
+					return
+				}
+				retcode = 200
+				resbody = &ures
+				return
+			} else {
+				if err = json.Unmarshal(rebody, &errres); err != nil {
+					log.Errorf("json unmarshl failed ")
+					retcode = 401
+					errstring = "server failed"
+					return
+				}
+				retcode = errres.Code
+				errstring = errres.Error
+				return
+			}
+
+		}
+		return
+	}
 */
 func (b *Efs) mkfiletodirectory(bucket, filename string, overWriteFlag int,
 	filesize int64, mime string, buf string, deleteAfterDays int) (ret meta.PMkfileRetOK, oFileSize int64, err error) {
@@ -1384,88 +1384,88 @@ func (b *Efs) mkfiletocallbak(bucket, filename string, overWriteFlag int,
 }
 
 /*
-func (b *Efs) Mkfile(bucket, filename, id, mime, buf string, filesize int64, overWriteFlag int) (hash, key string, retcode int, errstring string, oFileSize int64) {
-	var (
-		err    error
-		respOK meta.PMkfileRetOK
-	)
+	func (b *Efs) Mkfile(bucket, filename, id, mime, buf string, filesize int64, overWriteFlag int) (hash, key string, retcode int, errstring string, oFileSize int64) {
+		var (
+			err    error
+			respOK meta.PMkfileRetOK
+		)
 
-	//fpart.Close()
+		//fpart.Close()
 
-	if respOK, oFileSize, err = b.mkfiletodirectory(bucket, filename, overWriteFlag, filesize, mime, buf); err != nil {
+		if respOK, oFileSize, err = b.mkfiletodirectory(bucket, filename, overWriteFlag, filesize, mime, buf); err != nil {
 
-		retcode, errstring = errortostring(err)
-		return
-	}
-
-	hash = respOK.Hash
-	key = respOK.Key
-
-	retcode = 200
-	//	log.Errorf("oldfilsize=%d", oFileSize)
-	return
-}
-
-func (b *Efs) Mkfile(bucket, filname, id, mime, buf string, filesize int64, repeat_flag int) (hash, key string, retcode int, errstring string) {
-	var (
-		err           error
-		ures          upload_res
-		header        = url.Values{}
-		params        = url.Values{}
-		rebody, rbody []byte
-		code          int
-		req           mkfile_req
-		errres        proxy_errres
-	)
-	uri := fmt.Sprintf(_proxy_mkfile, b.c.ProxyAddr)
-	ekey := fmt.Sprintf("%s:%s", bucket, filname)
-	b64ekey := b64.URLEncoding.EncodeToString([]byte(ekey))
-	header.Set("ekey", b64ekey)
-	header.Set("Content-Type", "application/octet-stream")
-	header.Set("overwrite", fmt.Sprintf("%d", repeat_flag))
-	req.Id = id
-	req.Mime = mime
-	req.Filesize = filesize
-	req.Buf = buf
-	rbody, err = json.Marshal(req)
-	if err != nil {
-		log.Errorf("call proxy mkfile body marshal json error(%v)", err)
-		retcode = 401
-		errstring = "server failed"
-		return
-	}
-	rebody, err, code = Http_binary("POST", uri, params, header, rbody)
-	if err != nil {
-		retcode = 401
-		errstring = "server failed"
-		return
-	} else {
-		if code == http.StatusOK {
-			if err = json.Unmarshal(rebody, &ures); err != nil {
-				log.Errorf("json unmarshl failed ")
-				retcode = 401
-				errstring = "server failed"
-				return
-			}
-			hash = ures.Hash
-			key = ures.Key
-			retcode = 200
-			return
-		} else {
-			if err = json.Unmarshal(rebody, &errres); err != nil {
-				log.Errorf("json unmarshl failed ")
-				retcode = 401
-				errstring = "server failed"
-				return
-			}
-			retcode = errres.Code
-			errstring = errres.Error
+			retcode, errstring = errortostring(err)
 			return
 		}
 
+		hash = respOK.Hash
+		key = respOK.Key
+
+		retcode = 200
+		//	log.Errorf("oldfilsize=%d", oFileSize)
+		return
 	}
-	return
-}
+
+	func (b *Efs) Mkfile(bucket, filname, id, mime, buf string, filesize int64, repeat_flag int) (hash, key string, retcode int, errstring string) {
+		var (
+			err           error
+			ures          upload_res
+			header        = url.Values{}
+			params        = url.Values{}
+			rebody, rbody []byte
+			code          int
+			req           mkfile_req
+			errres        proxy_errres
+		)
+		uri := fmt.Sprintf(_proxy_mkfile, b.c.ProxyAddr)
+		ekey := fmt.Sprintf("%s:%s", bucket, filname)
+		b64ekey := b64.URLEncoding.EncodeToString([]byte(ekey))
+		header.Set("ekey", b64ekey)
+		header.Set("Content-Type", "application/octet-stream")
+		header.Set("overwrite", fmt.Sprintf("%d", repeat_flag))
+		req.Id = id
+		req.Mime = mime
+		req.Filesize = filesize
+		req.Buf = buf
+		rbody, err = json.Marshal(req)
+		if err != nil {
+			log.Errorf("call proxy mkfile body marshal json error(%v)", err)
+			retcode = 401
+			errstring = "server failed"
+			return
+		}
+		rebody, err, code = Http_binary("POST", uri, params, header, rbody)
+		if err != nil {
+			retcode = 401
+			errstring = "server failed"
+			return
+		} else {
+			if code == http.StatusOK {
+				if err = json.Unmarshal(rebody, &ures); err != nil {
+					log.Errorf("json unmarshl failed ")
+					retcode = 401
+					errstring = "server failed"
+					return
+				}
+				hash = ures.Hash
+				key = ures.Key
+				retcode = 200
+				return
+			} else {
+				if err = json.Unmarshal(rebody, &errres); err != nil {
+					log.Errorf("json unmarshl failed ")
+					retcode = 401
+					errstring = "server failed"
+					return
+				}
+				retcode = errres.Code
+				errstring = errres.Error
+				return
+			}
+
+		}
+		return
+	}
 */
 func (b *Efs) FetchUpload(bucket, filename, fetchUrl string, size int64, replication int) (hash, key, mimeType string,
 	code int, errMsg string, oFileSize int64) {
@@ -2553,7 +2553,7 @@ func (b *Efs) List_del(bucket string, marker string, limit int, prefix string,
 	return
 }
 
-//compute hash
+// compute hash
 func (b *Efs) DownloadDirect(ekey string) (buf []byte, code int, errMsg string) {
 	var (
 		_rand  = rand.New(rand.NewSource(time.Now().UnixNano()))
@@ -2657,7 +2657,7 @@ func (b *Efs) DownloadDirect(ekey string) (buf []byte, code int, errMsg string) 
 	return
 }
 
-//compute hash
+// compute hash
 func (b *Efs) DownloadSlice(ekey string, start, end int64) (buf []byte, code int, errMsg string) {
 	var (
 		_rand  = rand.New(rand.NewSource(time.Now().UnixNano()))

@@ -3,12 +3,13 @@ package auth
 import (
 	"crypto/hmac"
 	"crypto/sha1"
-	"efs/authacess/bucket"
-	"efs/authacess/conf"
-	log "efs/log/glog"
 	"encoding/base64"
 	"encoding/json"
 	"errors"
+	"kagamistoreage/authacess/bucket"
+	"kagamistoreage/authacess/conf"
+	log "kagamistoreage/log/glog"
+
 	//"fmt"
 	"hash"
 	//"strconv"

@@ -1,17 +1,17 @@
 package main
 
 import (
-	"efs/libs/errors"
-	"efs/libs/meta"
 	b64 "encoding/base64"
 	"encoding/json"
 	"io/ioutil"
+	"kagamistoreage/libs/errors"
+	"kagamistoreage/libs/meta"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 )
 
 const (
@@ -422,7 +422,7 @@ func (s *server) mkblk(wr http.ResponseWriter, r *http.Request) {
 	return
 }
 
-//not use
+// not use
 func (s *server) bput(wr http.ResponseWriter, r *http.Request) {
 	var (
 		err       error
@@ -1447,7 +1447,7 @@ func (s *server) bstat(wr http.ResponseWriter, r *http.Request) {
 	return
 }
 
-//destroy list
+// destroy list
 func (s *server) destroylist(wr http.ResponseWriter, r *http.Request) {
 	var (
 		res            *meta.DestroyListResponse
@@ -1598,7 +1598,7 @@ func (s *server) destroyfile(wr http.ResponseWriter, r *http.Request) {
 	return
 }
 
-//destory expire
+// destory expire
 func (s *server) destroyexpire(wr http.ResponseWriter, r *http.Request) {
 	var (
 		res meta.DestroyExpireResponse

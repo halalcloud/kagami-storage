@@ -1,8 +1,8 @@
 package task
 
 import (
-	log "efs/log/glog"
 	"encoding/json"
+	log "kagamistoreage/log/glog"
 
 	"gopkg.in/mgo.v2"
 )

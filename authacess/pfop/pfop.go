@@ -1,14 +1,14 @@
 package pfop
 
 import (
-	"efs/authacess/conf"
-	"efs/authacess/httpcli"
-	log "efs/log/glog"
 	"encoding/base64"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"kagamistoreage/authacess/conf"
+	"kagamistoreage/authacess/httpcli"
+	log "kagamistoreage/log/glog"
 	"net/http"
 	"net/url"
 	"strings"

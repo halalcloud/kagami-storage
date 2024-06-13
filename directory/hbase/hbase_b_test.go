@@ -1,7 +1,7 @@
 package hbase
 
 import (
-	"efs/libs/meta"
+	"kagamistoreage/libs/meta"
 	"math/rand"
 	"testing"
 	"time"
@@ -35,7 +35,6 @@ func BenchmarkHbasePut(b *testing.B) {
 		}
 	})
 }
-
 
 func BenchmarkHbaseGet(b *testing.B) {
 	var (

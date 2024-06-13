@@ -61,7 +61,7 @@ func NewConfig(conf string) (c *Config, err error) {
 	if err = toml.Unmarshal(blob, c); err != nil {
 		return
 	}
-	// efs,/efs,/efs/ convert to /efs/
+	// efs,/efs,/kagamistoreage/ convert to /kagamistoreage/
 	if c.Prefix != "" {
 		c.Prefix = path.Join("/", c.Prefix) + "/"
 		// http://domain/ covert to http://domain

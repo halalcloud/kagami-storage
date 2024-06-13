@@ -1,15 +1,15 @@
 package main
 
 import (
-	"efs/libs/meta"
-	"efs/pitchfork/conf"
-	myzk "efs/pitchfork/zk"
 	"encoding/json"
+	"kagamistoreage/libs/meta"
+	"kagamistoreage/pitchfork/conf"
+	myzk "kagamistoreage/pitchfork/zk"
 	"net/http"
 	"sort"
 	"time"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 
 	"fmt"
 

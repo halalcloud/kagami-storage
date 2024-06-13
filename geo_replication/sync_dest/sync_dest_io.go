@@ -1,10 +1,10 @@
 package sync_dest
 
 import (
-	"efs/geo_replication/conf"
-	log "efs/log/glog"
 	"fmt"
 	"io"
+	"kagamistoreage/geo_replication/conf"
+	log "kagamistoreage/log/glog"
 	"os"
 	"path/filepath"
 )

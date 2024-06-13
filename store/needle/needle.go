@@ -3,11 +3,11 @@ package needle
 import (
 	"bufio"
 	"bytes"
-	"efs/libs/encoding/binary"
-	"efs/libs/errors"
 	"fmt"
 	"hash/crc32"
 	"io"
+	"kagamistoreage/libs/encoding/binary"
+	"kagamistoreage/libs/errors"
 	"sync"
 	"syscall"
 )

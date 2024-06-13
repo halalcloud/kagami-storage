@@ -4,8 +4,9 @@ import (
 	_ "database/sql"
 	"errors"
 
+	log "kagamistoreage/log/glog"
+
 	_ "github.com/go-sql-driver/mysql"
-	log "efs/log/glog"
 )
 
 func AddRegion(region string) (id int64, err error) {

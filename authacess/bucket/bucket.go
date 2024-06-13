@@ -4,9 +4,6 @@ import (
 	"bytes"
 	"crypto/hmac"
 	"crypto/sha1"
-	"efs/authacess/conf"
-	"efs/libs/meta"
-	log "efs/log/glog"
 	"encoding/base64"
 	b64 "encoding/base64"
 	"encoding/json"
@@ -14,6 +11,9 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"kagamistoreage/authacess/conf"
+	"kagamistoreage/libs/meta"
+	log "kagamistoreage/log/glog"
 	"mime/multipart"
 	"net"
 	"net/http"
@@ -54,18 +54,18 @@ const (
 )
 
 /*
-type Item struct {
-	Bname       string
-	RegionId    int
-	Keysecret   string
-	Key         string
-	Imgsource   string
-	Propety     int
-	Dnsname     string
-	Replication int
-	Ctime       string
-	Timeout     int64
-}
+	type Item struct {
+		Bname       string
+		RegionId    int
+		Keysecret   string
+		Key         string
+		Imgsource   string
+		Propety     int
+		Dnsname     string
+		Replication int
+		Ctime       string
+		Timeout     int64
+	}
 */
 type BucketInfo struct {
 	Buckets map[string][]*meta.Bucket_item

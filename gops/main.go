@@ -1,8 +1,9 @@
 package main
 
 import (
-	"efs/gops/models/ops"
-	_ "efs/gops/routers"
+	"kagamistoreage/gops/models/ops"
+	_ "kagamistoreage/gops/routers"
+
 	"github.com/astaxie/beego"
 )
 

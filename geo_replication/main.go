@@ -1,9 +1,9 @@
 package main
 
 import (
-	"efs/geo_replication/conf"
-	log "efs/log/glog"
 	"flag"
+	"kagamistoreage/geo_replication/conf"
+	log "kagamistoreage/log/glog"
 	"net/http"
 	_ "net/http/pprof"
 	"runtime"

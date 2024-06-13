@@ -1,8 +1,8 @@
 package zk
 
 import (
-	"efs/store/conf"
 	"fmt"
+	"kagamistoreage/store/conf"
 	"testing"
 	"time"
 )

@@ -1,7 +1,7 @@
 package global
 
 import (
-	"efs/gops/models/types"
+	"kagamistoreage/gops/models/types"
 	"sync"
 )
 
@@ -52,7 +52,7 @@ func Statustostring(status int) (alarmstatus string) {
 	return
 }
 
-//exist in group
+// exist in group
 func IsInGroup(storeid string) (exist bool) {
 	inGroupStores := IN_GROUP_STORES
 

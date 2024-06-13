@@ -2,15 +2,15 @@ package main
 
 import (
 	"bytes"
-	"efs/libs/errors"
-	"efs/libs/meta"
-	myos "efs/store/os"
-	"efs/store/volume"
 	"encoding/json"
 	syserrors "errors"
 	"fmt"
 	"io"
 	"io/ioutil"
+	"kagamistoreage/libs/errors"
+	"kagamistoreage/libs/meta"
+	myos "kagamistoreage/store/os"
+	"kagamistoreage/store/volume"
 	"mime/multipart"
 	"net"
 	"net/http"
@@ -24,7 +24,7 @@ import (
 
 	itime "github.com/Terry-Mao/marmot/time"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 )
 
 const (
@@ -55,7 +55,7 @@ var (
 	_canceler = _transport.CancelRequest
 )
 
-//rebalance move source local
+// rebalance move source local
 type volumerebalance struct {
 	vid         int32
 	newvid      int32
@@ -64,7 +64,7 @@ type volumerebalance struct {
 	//	control     chan int
 }
 
-//rebalance move dest local
+// rebalance move dest local
 type volumetmp struct {
 	vid                 int32
 	file_tmpvolume      string
@@ -191,7 +191,7 @@ func (s *Server) readalldata(rd io.Reader, size int64) (data []byte, err error) 
 
 }
 
-//recv data from  move volume
+// recv data from  move volume
 func (s *Server) movevolume_recvdata(wr http.ResponseWriter, r *http.Request) {
 	var (
 		vid      int64
@@ -267,7 +267,7 @@ func (s *Server) movevolume_recvdata(wr http.ResponseWriter, r *http.Request) {
 
 }
 
-//add volume in local recovery index and open file
+// add volume in local recovery index and open file
 func (s *Store) add_recovery_volume(vid int32) (voltmp *volumetmp, err error) {
 	var (
 		vol   *volumetmp
@@ -361,7 +361,7 @@ func (s *Store) set_movedest_volume_updatetime(vid int32) {
 	s.rclock.Unlock()
 }
 
-//add volume in local movedest index and open file
+// add volume in local movedest index and open file
 func (s *Store) add_movedest_volume(vid int32) (voltmp *volumetmp, err error) {
 	var (
 		vol *volumetmp
@@ -402,7 +402,7 @@ func (s *Store) add_movedest_volume(vid int32) (voltmp *volumetmp, err error) {
 	return
 }
 
-//destory recovery volume index local not remove file
+// destory recovery volume index local not remove file
 func (s *Store) destoryRecoveryVolumeIndex(vid int32) (err error) {
 	var (
 		i    int
@@ -430,7 +430,7 @@ func (s *Store) destoryRecoveryVolumeIndex(vid int32) (err error) {
 	return
 }
 
-//destory dest volume index local
+// destory dest volume index local
 func (s *Store) destoryDestVolumeIndex(vid int32) (err error) {
 	var (
 		i    int
@@ -551,7 +551,7 @@ func (s *Store) movevolume_writedata(vid int32, filetype string, offset int64, e
 
 }
 
-//request rebalance move volume
+// request rebalance move volume
 func (s *Server) movevolume(wr http.ResponseWriter, r *http.Request) {
 	var (
 		err         error
@@ -1161,7 +1161,7 @@ func (s *Store) saveMoveVolumeIndex() (err error) {
 	return
 }
 
-//add movevolume task to movevolume list and local rebalancevolumeindex, get a goroute do this movevolume
+// add movevolume task to movevolume list and local rebalancevolumeindex, get a goroute do this movevolume
 func (s *Store) addmvvolume(vid, newvid int32, deststoreid string) (err error) {
 	var (
 		tmp *volumerebalance
@@ -1199,7 +1199,7 @@ func (s *Store) setRebalanceTaskStat(vid int32, stat bool) {
 
 }
 
-//goroute do move volume
+// goroute do move volume
 func (s *Store) movevolume(deststoreid string, movevolid, newvid int32) {
 	var (
 		rebalanceapi, uri string

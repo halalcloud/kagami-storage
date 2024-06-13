@@ -3,13 +3,13 @@ package bucket
 import (
 	"crypto/hmac"
 	"crypto/sha1"
-	"efs/gos_sync/libs/httpcli"
-	log "efs/log/glog"
 	b64 "encoding/base64"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"kagamistoreage/gos_sync/libs/httpcli"
+	log "kagamistoreage/log/glog"
 	"net/http"
 	"strings"
 )

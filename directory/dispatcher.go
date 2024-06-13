@@ -1,14 +1,14 @@
 package main
 
 import (
-	"efs/libs/errors"
-	"efs/libs/meta"
+	"kagamistoreage/libs/errors"
+	"kagamistoreage/libs/meta"
 	"math/rand"
 	"sort"
 	"sync"
 	"time"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 )
 
 // Dispatcher
@@ -297,7 +297,7 @@ func (d *Dispatcher) VolumeIdPolingExcl(exclGid int, replication int) (vid int32
 
 }
 
-//group replication filter
+// group replication filter
 func (d *Dispatcher) replFilter(gids []int, replication int) (gs []int) {
 	var (
 		gid, repl int
@@ -315,7 +315,7 @@ func (d *Dispatcher) replFilter(gids []int, replication int) (gs []int) {
 	return
 }
 
-//get gid count and filter exclgid
+// get gid count and filter exclgid
 func (d *Dispatcher) gidnums(exclGid int, gids []int) (nums int, gs []int) {
 	var (
 		num    int

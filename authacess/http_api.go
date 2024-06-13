@@ -4,31 +4,31 @@ import (
 	"bytes"
 	"crypto/md5"
 	"crypto/sha1"
-	"efs/authacess/auth"
-	"efs/authacess/compressupload"
-	"efs/authacess/conf"
-	"efs/authacess/dataprocess"
-	"efs/authacess/efs"
-	"efs/authacess/fetch"
-	"efs/authacess/mimetype"
-	"efs/authacess/multipartupload"
-	"efs/authacess/pfop"
-	"efs/authacess/upload_strategy"
-	"efs/authacess/variable"
-	"efs/libs/errors"
-	"efs/libs/meta"
 	b64 "encoding/base64"
 	"encoding/json"
 	"fmt"
 	"hash"
 	"io"
 	"io/ioutil"
+	"kagamistoreage/authacess/auth"
+	"kagamistoreage/authacess/compressupload"
+	"kagamistoreage/authacess/conf"
+	"kagamistoreage/authacess/dataprocess"
+	"kagamistoreage/authacess/efs"
+	"kagamistoreage/authacess/fetch"
+	"kagamistoreage/authacess/mimetype"
+	"kagamistoreage/authacess/multipartupload"
+	"kagamistoreage/authacess/pfop"
+	"kagamistoreage/authacess/upload_strategy"
+	"kagamistoreage/authacess/variable"
+	"kagamistoreage/libs/errors"
+	"kagamistoreage/libs/meta"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 )
 
 const (
@@ -943,7 +943,7 @@ func (s *server) mkfile(wr http.ResponseWriter, r *http.Request) {
 	return
 }
 
-//modify callback,ready to del
+// modify callback,ready to del
 func (s *server) mkfile_del(wr http.ResponseWriter, r *http.Request) {
 	var (
 		start                                        = time.Now()
@@ -1532,7 +1532,7 @@ func (s *server) hash(wr http.ResponseWriter, r *http.Request) {
 	HashResp(wr, hr)
 }
 
-//direct hash
+// direct hash
 func (s *server) directHash(ekey, hashType string) (code int, errMsg, hash string) {
 	var (
 		data []byte
@@ -1557,7 +1557,7 @@ func (s *server) directHash(ekey, hashType string) (code int, errMsg, hash strin
 	return
 }
 
-//stream hash
+// stream hash
 func (s *server) streamHash(ekey, hashType string, size int64) (code int, errMsg, hashStr string) {
 	const BLOCK_SIZE = 4 * 1024 * 1024
 	var (

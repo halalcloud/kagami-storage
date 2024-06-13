@@ -2,11 +2,12 @@ package main
 
 import (
 	"bytes"
-	"efs/authacess/conf"
-	"efs/libs/meta"
-	log "efs/log/glog"
 	"encoding/base64"
 	"encoding/json"
+	"kagamistoreage/authacess/conf"
+	"kagamistoreage/libs/meta"
+	log "kagamistoreage/log/glog"
+
 	//"fmt"
 	"io/ioutil"
 	"mime/multipart"
@@ -40,7 +41,7 @@ type HttpRe struct {
 	R *http.Request
 }
 
-//upload
+// upload
 type Upload_req struct {
 	HttpRe
 	Host           string //hostname
@@ -226,7 +227,7 @@ func (ureq *Upload_req) FileClose() {
 	ureq.FileBinaryData.Close()
 }
 
-//mkblock
+// mkblock
 type Mkblock_req struct {
 	HttpRe
 	Host           string
@@ -714,7 +715,7 @@ func (mkf *Mkfile_req) Parms(c *conf.Config, urlpath string) (code int, errstrin
 	return
 }
 
-//fetch
+// fetch
 type FetchReq struct {
 	R    *http.Request
 	Data FetchReqData
@@ -806,7 +807,7 @@ func (resp *FetchResp) OKResp(wr http.ResponseWriter) {
 	wr.Write(retJson)
 }
 
-//prefetch
+// prefetch
 type PreFetchReq struct {
 	R    *http.Request
 	Data PreFetchReqData
@@ -874,7 +875,7 @@ func (resp *PreFetchResp) OKResp(wr http.ResponseWriter) {
 	wr.WriteHeader(http.StatusOK)
 }
 
-//stat
+// stat
 type StatReq struct {
 	R    *http.Request
 	Data StatReqData
@@ -963,7 +964,7 @@ func (resp *StatResp) OKResp(wr http.ResponseWriter) {
 	wr.Write(retJson)
 }
 
-//chgm
+// chgm
 type ChgmReq struct {
 	R    *http.Request
 	Data ChgmReqData
@@ -1049,7 +1050,7 @@ func (resp *ChgmResp) ErrorResp(wr http.ResponseWriter) {
 	wr.Write(retJson)
 }
 
-//move
+// move
 type MoveReq struct {
 	R    *http.Request
 	Data MoveReqData
@@ -1145,7 +1146,7 @@ func (resp *MoveResp) ErrorResp(wr http.ResponseWriter) {
 	wr.Write(retJson)
 }
 
-//copy
+// copy
 type CopyReq struct {
 	R    *http.Request
 	Data CopyReqData
@@ -1241,7 +1242,7 @@ func (resp *CopyResp) OKResp(wr http.ResponseWriter) {
 	wr.WriteHeader(http.StatusOK)
 }
 
-//delete
+// delete
 type DeleteReq struct {
 	R    *http.Request
 	Data DeleteReqData
@@ -1315,7 +1316,7 @@ func (resp *DeleteResp) OKResp(wr http.ResponseWriter) {
 	wr.WriteHeader(http.StatusOK)
 }
 
-//list
+// list
 type ListReq struct {
 	R    *http.Request
 	Data ListReqData
@@ -1380,7 +1381,7 @@ func (resp *ListResp) OKResp(wr http.ResponseWriter) {
 	wr.Write(retJson)
 }
 
-//hash
+// hash
 func HashParse(authorization, urlStr string) (hashType, bucket, file, token string, code int, errMsg string) {
 	var (
 		data []byte
@@ -1440,7 +1441,7 @@ func HashResp(wr http.ResponseWriter, hr *HashRespData) {
 	wr.Write(retJson)
 }
 
-//batch
+// batch
 type BatchReq struct {
 	R    *http.Request
 	Data BatchReqData
@@ -1564,7 +1565,7 @@ func (resp *BatchResp) OKResp(wr http.ResponseWriter, code int) {
 	wr.Write(resp.Data)
 }
 
-//---
+// ---
 type ErrRespData struct {
 	Msg  string `json:"error"`
 	Code int    `json:"code"`

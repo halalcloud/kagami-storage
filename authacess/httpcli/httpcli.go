@@ -1,7 +1,7 @@
 package httpcli
 
 import (
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 	"net"
 	"net/http"
 	"time"

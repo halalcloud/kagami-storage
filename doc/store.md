@@ -93,7 +93,7 @@ store has many volumes, volume has a unique id in one store server. one volume h
 [Back to TOC](#table-of-contents)
 
 ## Installation
-* efs/store development files are required.
+* kagamistoreage/store development files are required.
 * golang 1.5.1
 
 
@@ -154,7 +154,7 @@ $> cat /tmp/store.idx
 
 ```sh
 # test
-$ cd efs/store
+$ cd kagamistoreage/store
 $ go test -v
 # benchmark
 go test -v -bench=. -benchtime=10s
@@ -309,7 +309,7 @@ response a json:
 | 65534 | param error |
 | 65535   | internal error |
 
-for more error code, see the [errors.go](http://git.c4hcdn.cn:85/cloud-storage-group/efs/tree/master/store/errors.go)
+for more error code, see the [errors.go](https://github.com/halalcloud/kagami-storage/tree/master/store/errors.go)
 
 exmaples:
 
@@ -413,7 +413,7 @@ response a json:
 | 65534 | param error |
 | 65535   | internal error |
 
-for more error code, see the [errors.go](http://git.c4hcdn.cn:85/cloud-storage-group/efs/tree/master/store/errors.go)
+for more error code, see the [errors.go](https://github.com/halalcloud/kagami-storage/tree/master/store/errors.go)
 
 exmaples:
 

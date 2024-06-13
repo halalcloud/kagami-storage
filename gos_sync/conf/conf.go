@@ -1,8 +1,8 @@
 package conf
 
 import (
-	"efs/gos_sync/libs/toml"
 	"io/ioutil"
+	"kagamistoreage/gos_sync/libs/toml"
 	"os"
 )
 

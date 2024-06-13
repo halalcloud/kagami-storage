@@ -1,9 +1,9 @@
 package main
 
 import (
-	"efs/store/conf"
 	"flag"
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
+	"kagamistoreage/store/conf"
 )
 
 var (

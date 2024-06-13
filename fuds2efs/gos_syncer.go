@@ -1,10 +1,11 @@
 package main
 
 import (
+	log "kagamistoreage/fuds2kagamistoreage/libs/glog"
+
 	"ecloud_gosdk.v1/conf"
 	"ecloud_gosdk.v1/ecloud"
 	"ecloud_gosdk.v1/ecloudcli"
-	log "efs/fuds2efs/libs/glog"
 )
 
 type GOSSyncer struct {

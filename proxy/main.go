@@ -1,9 +1,9 @@
 package main
 
 import (
-	log "efs/log/glog"
-	"efs/proxy/conf"
 	"flag"
+	log "kagamistoreage/log/glog"
+	"kagamistoreage/proxy/conf"
 	"os"
 	"os/signal"
 	"runtime"

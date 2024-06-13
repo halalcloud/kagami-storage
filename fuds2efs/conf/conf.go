@@ -1,8 +1,8 @@
 package conf
 
 import (
-	"efs/fuds2efs/libs/toml"
 	"io/ioutil"
+	"kagamistoreage/fuds2kagamistoreage/libs/toml"
 	"os"
 	"time"
 )

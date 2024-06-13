@@ -1,11 +1,11 @@
 package store
 
 import (
-	liberror "efs/libs/errors"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io/ioutil"
+	liberror "kagamistoreage/libs/errors"
 	"net/http"
 	"net/url"
 	"strconv"

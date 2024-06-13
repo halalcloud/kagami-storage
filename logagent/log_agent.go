@@ -2,14 +2,14 @@ package main
 
 import (
 	"bufio"
-	log "efs/log/glog"
-	"efs/logagent/conf"
-	"efs/logagent/db"
 	b64 "encoding/base64"
 	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
+	log "kagamistoreage/log/glog"
+	"kagamistoreage/logagent/conf"
+	"kagamistoreage/logagent/db"
 	"os"
 	"strconv"
 	"strings"

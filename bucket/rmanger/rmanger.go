@@ -1,13 +1,13 @@
 package rmanger
 
 import (
-	"efs/bucket/database"
-	"efs/bucket/global"
-	"efs/libs/errors"
+	"kagamistoreage/bucket/database"
+	"kagamistoreage/bucket/global"
+	"kagamistoreage/libs/errors"
 	"sync"
 	"time"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 )
 
 type Regions struct {

@@ -1,11 +1,11 @@
 package hbase
 
 import (
-	"efs/directory/conf"
-	"efs/directory/hbase/hbasethrift"
-	log "efs/log/glog"
+	"kagamistoreage/directory/conf"
+	"kagamistoreage/directory/hbase/hbasethrift"
+	log "kagamistoreage/log/glog"
 
-	"git.apache.org/thrift.git/lib/go/thrift"
+	"github.com/apache/thrift/lib/go/thrift"
 )
 
 var (

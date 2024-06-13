@@ -2,13 +2,13 @@ package database
 
 import (
 	sql "database/sql"
-	liberr "efs/libs/errors"
-	"efs/libs/meta"
 	"errors"
 	"fmt"
+	liberr "kagamistoreage/libs/errors"
+	"kagamistoreage/libs/meta"
 	"time"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 
 	_ "github.com/go-sql-driver/mysql"
 )

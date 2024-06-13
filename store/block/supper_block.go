@@ -3,17 +3,17 @@ package block
 import (
 	"bufio"
 	"bytes"
-	"efs/libs/errors"
-	"efs/store/conf"
-	"efs/store/needle"
-	myos "efs/store/os"
 	syserrors "errors"
 	"io"
+	"kagamistoreage/libs/errors"
+	"kagamistoreage/store/conf"
+	"kagamistoreage/store/needle"
+	myos "kagamistoreage/store/os"
 	"os"
 	"strings"
 	"syscall"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 )
 
 // Super block has a header.

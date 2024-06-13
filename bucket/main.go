@@ -1,14 +1,14 @@
 package main
 
 import (
-	"efs/bucket/conf"
 	"flag"
+	"kagamistoreage/bucket/conf"
 	"os"
 	"os/signal"
 	"runtime"
 	"syscall"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 )
 
 var (

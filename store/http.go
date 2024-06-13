@@ -1,10 +1,10 @@
 package main
 
 import (
-	"efs/libs/errors"
-	"efs/libs/stat"
-	"efs/store/conf"
 	"encoding/json"
+	"kagamistoreage/libs/errors"
+	"kagamistoreage/libs/stat"
+	"kagamistoreage/store/conf"
 	"mime/multipart"
 	"net"
 	"net/http"
@@ -12,8 +12,7 @@ import (
 	"strconv"
 	"time"
 
-	log "efs/log/glog"
-
+	log "kagamistoreage/log/glog"
 	//"github.com/jackminicloud/time/rate"
 )
 

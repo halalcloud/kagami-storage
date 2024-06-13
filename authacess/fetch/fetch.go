@@ -1,10 +1,10 @@
 package fetch
 
 import (
-	"efs/authacess/httpcli"
-	log "efs/log/glog"
 	"errors"
 	"io/ioutil"
+	"kagamistoreage/authacess/httpcli"
+	log "kagamistoreage/log/glog"
 	"net/http"
 	"strconv"
 )

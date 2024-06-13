@@ -1,9 +1,9 @@
 package main
 
 import (
-	"efs/fuds2efs/conf"
-	log "efs/fuds2efs/libs/glog"
 	"flag"
+	"kagamistoreage/fuds2kagamistoreage/conf"
+	log "kagamistoreage/fuds2kagamistoreage/libs/glog"
 	"os"
 	"os/signal"
 	"strings"

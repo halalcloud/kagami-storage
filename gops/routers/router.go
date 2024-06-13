@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"efs/gops/controllers"
+	"kagamistoreage/gops/controllers"
 
 	"github.com/astaxie/beego"
 )

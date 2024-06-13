@@ -1,8 +1,8 @@
 package hbase
 
 import (
-	"efs/libs/meta"
 	"fmt"
+	"kagamistoreage/libs/meta"
 	"testing"
 	"time"
 )

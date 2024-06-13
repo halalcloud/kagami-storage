@@ -1,9 +1,9 @@
 package index
 
 import (
-	"efs/libs/errors"
-	"efs/store/conf"
-	"efs/store/needle"
+	"kagamistoreage/libs/errors"
+	"kagamistoreage/store/conf"
+	"kagamistoreage/store/needle"
 	"os"
 	"testing"
 	"time"

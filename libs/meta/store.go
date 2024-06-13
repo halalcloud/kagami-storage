@@ -1,13 +1,13 @@
 package meta
 
 import (
-	"efs/libs/errors"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"kagamistoreage/libs/errors"
 	"net/http"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 )
 
 const (

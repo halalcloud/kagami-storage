@@ -1,15 +1,15 @@
 package volume
 
 import (
-	"efs/libs/errors"
-	"efs/libs/stat"
-	"efs/store/block"
-	"efs/store/conf"
-	"efs/store/index"
-	"efs/store/needle"
-	myos "efs/store/os"
 	"fmt"
 	"io"
+	"kagamistoreage/libs/errors"
+	"kagamistoreage/libs/stat"
+	"kagamistoreage/store/block"
+	"kagamistoreage/store/conf"
+	"kagamistoreage/store/index"
+	"kagamistoreage/store/needle"
+	myos "kagamistoreage/store/os"
 	"os"
 	"sort"
 	"strconv"
@@ -18,7 +18,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 )
 
 const (
@@ -480,7 +480,7 @@ func (v *Volume) Delete(key int64) (err error) {
 	return
 }
 
-//who use this func who lock volume for compact
+// who use this func who lock volume for compact
 func (v *Volume) UnlockDelete(key int64) (err error) {
 	var (
 		ok     bool
@@ -578,14 +578,14 @@ func (v *Volume) Moveunref() {
 	}
 }
 
-//if volume is doing recover so it is status is Damage true
+// if volume is doing recover so it is status is Damage true
 func (v *Volume) Modify_doing_recovery_status() {
 	v.lock.Lock()
 	defer v.lock.Unlock()
 	v.Damage = true
 }
 
-//move volume to other sotre
+// move volume to other sotre
 func (v *Volume) Movevolume(file string, fn func(data []byte, offset, total int64, end bool) (err error)) (err error) {
 	var (
 		r  *os.File

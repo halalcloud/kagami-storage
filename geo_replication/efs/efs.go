@@ -1,7 +1,7 @@
 package efs
 
 import (
-	"efs/geo_replication/conf"
+	"kagamistoreage/geo_replication/conf"
 )
 
 type Src_io struct {

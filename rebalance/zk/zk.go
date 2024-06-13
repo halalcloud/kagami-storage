@@ -1,12 +1,12 @@
 package zk
 
 import (
-	"efs/libs/meta"
-	"efs/rebalance/conf"
 	"encoding/json"
+	"kagamistoreage/libs/meta"
+	"kagamistoreage/rebalance/conf"
 	"path"
 
-	log "efs/log/glog"
+	log "kagamistoreage/log/glog"
 
 	"github.com/samuel/go-zookeeper/zk"
 	//"strconv"
@@ -189,7 +189,7 @@ func (z *Zookeeper) GroupStores(group string) (nodes []string, err error) {
 	return
 }
 
-//Get Rebalance children vids
+// Get Rebalance children vids
 func (z *Zookeeper) Rebalance() (vids []string, err error) {
 	if vids, _, err = z.c.Children(z.config.Zookeeper.RebalanceRoot); err != nil {
 		log.Errorf("zk.Children(\"%s\") error(%v)", z.config.Zookeeper.RebalanceRoot, err)
@@ -197,7 +197,7 @@ func (z *Zookeeper) Rebalance() (vids []string, err error) {
 	return
 }
 
-//Get Rebalance vids children stores
+// Get Rebalance vids children stores
 func (z *Zookeeper) RebalanceVid(vid string) (stores []string, err error) {
 	var spath = path.Join(z.config.Zookeeper.RebalanceRoot, vid)
 	if stores, _, err = z.c.Children(spath); err != nil {
@@ -206,7 +206,7 @@ func (z *Zookeeper) RebalanceVid(vid string) (stores []string, err error) {
 	return
 }
 
-//Create Rebalance vids node
+// Create Rebalance vids node
 func (z *Zookeeper) CreateRebalanceVid(vid string) (err error) {
 	var (
 		exist bool
@@ -229,7 +229,7 @@ func (z *Zookeeper) CreateRebalanceVid(vid string) (err error) {
 	return
 }
 
-//Get rebalance vid value
+// Get rebalance vid value
 func (z *Zookeeper) GetRebalanceVidValue(vid string) (data []byte, err error) {
 	var spath = path.Join(z.config.Zookeeper.RebalanceRoot, vid)
 	if data, _, err = z.c.Get(spath); err != nil {
@@ -238,7 +238,7 @@ func (z *Zookeeper) GetRebalanceVidValue(vid string) (data []byte, err error) {
 	return
 }
 
-//Set rebalance vid value
+// Set rebalance vid value
 func (z *Zookeeper) SetRebalanceVidValue(vid string, data []byte) (err error) {
 	var (
 		spath string
@@ -261,7 +261,7 @@ func (z *Zookeeper) SetRebalanceVidValue(vid string, data []byte) (err error) {
 	return
 }
 
-//Create rebalance vid store node
+// Create rebalance vid store node
 func (z *Zookeeper) CreateRebalanceVidStore(vid string, store string) (err error) {
 	var (
 		exist bool
@@ -285,7 +285,7 @@ func (z *Zookeeper) CreateRebalanceVidStore(vid string, store string) (err error
 	return
 }
 
-//Get rebalance vid store value
+// Get rebalance vid store value
 func (z *Zookeeper) GetRebalanceVidStoreValue(vid string, store string) (data []byte, err error) {
 	var spath = path.Join(z.config.Zookeeper.RebalanceRoot, vid)
 	spath = path.Join(spath, store)
@@ -295,7 +295,7 @@ func (z *Zookeeper) GetRebalanceVidStoreValue(vid string, store string) (data []
 	return
 }
 
-//Set rebalance vid store value
+// Set rebalance vid store value
 func (z *Zookeeper) SetRebalanceVidStoreValue(vid string, store string, data []byte) (err error) {
 	var (
 		spath string
@@ -320,7 +320,7 @@ func (z *Zookeeper) SetRebalanceVidStoreValue(vid string, store string, data []b
 	return
 }
 
-//Get Rebalance path value os status
+// Get Rebalance path value os status
 func (z *Zookeeper) GetRebalanceStatusValue() (state string, err error) {
 	var (
 		exist         bool
@@ -352,7 +352,7 @@ func (z *Zookeeper) GetRebalanceStatusValue() (state string, err error) {
 	return
 }
 
-//Set Rebalance vid store value of status
+// Set Rebalance vid store value of status
 func (z *Zookeeper) SetVidStoreRebalanceStatus(vid, storeid string, data []byte) (err error) {
 	var (
 		exist     bool
@@ -419,7 +419,7 @@ func (z *Zookeeper) SetRebalanceStatusValue(state string) (err error) {
 	return
 }
 
-//Set Dispatcher path valume of model
+// Set Dispatcher path valume of model
 func (z *Zookeeper) SetDispatcherModleValue(model string) (err error) {
 	var (
 		exist          bool
@@ -449,7 +449,7 @@ func (z *Zookeeper) SetDispatcherModleValue(model string) (err error) {
 	return
 }
 
-//Delete Rebalance all children nodes
+// Delete Rebalance all children nodes
 func (z *Zookeeper) CleanRebalanceChildrenNodes() (err error) {
 	var (
 		exist         bool
