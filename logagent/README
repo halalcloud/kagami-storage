@@ -1,0 +1,24 @@
+Features:
+
+this agent is for efs statis.log
+it collect statis.log to mongodb. for sucess log(status == 200),and 
+method("/r/upload","/r/upload","/r/prefetch","/r/fetch","/r/delete"
+,"/r/chgm","/r/deleteAfter","/r/copy","/r/move","/b/create","/b/delete"
+)
+
+this message sento mongodb
+mongo struct:
+struct {
+	Op       string
+	Param    string  // Ekey-param1
+	Ekey     string
+	Add_Time int64
+}
+
+Exception handling:
+
+if mongodb is disconnect,this agent is shutdown,stop collect.
+next start agent check file offset,and start this offset begin collect
+
+if this log file is big 5GB,it is will split,agent check file inode,
+if change,agent will reopen file begin collect.

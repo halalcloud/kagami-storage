@@ -1,0 +1,41 @@
+PprofEnable = true
+
+PprofListen = "localhost:2231"
+
+HttpAddr = "localhost:2232"
+
+ProxyAddr = "localhost:2235"
+
+BucketAddr = "localhost:2235"
+
+EfsAddr = "192.168.200.60:6065"
+
+Domain = "http://localhost:2232/"                                                                              
+
+MaxFileSize = 20971520
+
+SliceFileSize = 4194304
+
+#mutilpart upload
+PartTmppath = "/cache_data"
+MultipartDataTimeout = 3600
+DataCleanTimeout= "2h"
+Hostname = "192.168.100.98"
+
+
+#token timeout
+Deadline = 600
+
+#bucket info cache timeout
+BcacheTimeout = 600
+
+#bucket ak,sk
+BucketAk = "ak"
+BucketSk = "sk"
+
+#for biger 50GB file callbak
+Maxctxs= 12800
+CallbakAddr = "192.168.100.98:9089"
+
+#data process
+DpProxy = "0.0.0.0:xxx"

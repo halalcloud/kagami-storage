@@ -1,0 +1,29 @@
+PprofEnable = true
+
+PprofListen = "192.168.10.120:2231"
+
+HttpAddr = "192.168.10.120:2232"
+
+EfsAddr = "192.168.10.120:6065"
+
+Domain = "http://192.168.10.120:2232/"                                                                              
+
+#Prefix = "/efs/"
+
+MaxFileSize = 10485760
+
+AliyunKeyId = "xxxxx"
+AliyunKeySecret = "xxxxx"
+
+NetUserName = "xxxx"
+NetPasswd = "xxxx"
+
+PurgeMaxSize = 100000
+
+SliceFileSize = 4194304
+
+#*****bucket*****
+BucketAddr = "192.168.10.120:8088"
+BcacheTimeout = 600
+BucketAk = "ak"
+BucketSk = "sk"

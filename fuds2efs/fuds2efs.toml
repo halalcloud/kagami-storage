@@ -1,0 +1,20 @@
+# This is a toml config file
+
+offset_file = "./offset"
+
+buckets = [
+#cdnftp_sgz 
+"qyz-res.gztfgame.com:97UD2Kq0gf3XbNWfYH4T7iU9yeFnZCwt:GkfUo9TcNOEhXUFxqSVfmGkyoJ_Ka2x",
+"jnqk-res.gztfgame.com:97UD2Kq0gf3XbNWfYH4T7iU9yeFnZCwt:GkfUo9TcNOEhXUFxqSVfmGkyoJ_Ka2x",
+"gjxy-res.gztfgame.com:97UD2Kq0gf3XbNWfYH4T7iU9yeFnZCwt:GkfUo9TcNOEhXUFxqSVfmGkyoJ_Ka2x",
+"appdl-res.gztfgame.com:97UD2Kq0gf3XbNWfYH4T7iU9yeFnZCwt:GkfUo9TcNOEhXUFxqSVfmGkyoJ_Ka2x"
+]
+
+base_path = "/UPLOAD_MOUNTPOINT_01"
+
+log_file_path = "/var/log/vsftpd.log"
+
+parse_duration = "60s"
+
+UpHost = ""
+MgHost = ""

@@ -1,0 +1,9 @@
+PprofEnable = true
+
+PprofListen = "127.0.0.1:2231"
+
+HttpAddr = "127.0.0.1:2232"
+
+EfsAddr = "192.168.200.60:6065"
+
+BeforeDeleteDays = 1

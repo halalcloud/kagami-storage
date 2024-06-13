@@ -1,0 +1,6 @@
+ApiListen =     "192.168.100.98:9089"
+EfsAddr = "192.168.200.61:6071"
+MongoUserName = "root"
+MongoPasswd   = "123456"
+MongoAddr     = "192.168.200.63:27017"
+

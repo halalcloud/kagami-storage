@@ -1,0 +1,26 @@
+PprofEnable = true
+
+PprofListen = "localhost:2231"
+
+HttpAddr = "localhost:8080"
+
+#database config
+DatabaseAddr = "192.168.100.185"
+
+#DatabaseAddr = "localhost"
+DatabaseName = "bucket_manger"
+
+DatabaseUname = "root"
+
+Databasepasswd = "gosun.com"
+
+DatabasePort = "3306"
+
+Directoryhttpaddr = "192.168.100.98:6065"
+#bucket dns suffix
+Dnssuffix = ".bucket.gosuncloud.com"
+
+#Authorize
+Ak =""
+Sk =""
+

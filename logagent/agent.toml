@@ -1,0 +1,12 @@
+MongoUserName = "root"
+MongoPasswd   = "123456"
+MongoAddr     = "192.168.200.63:27017"
+
+#config same as gosync moudle
+MongoDatabase = "efsrsync"
+MongoTable    = "logqueue"
+
+#logfile path
+Logfilename    = "/usr/local/ecloud/log/authacess.STATIS.log"
+#agent write the log file offset file
+AgentIndexfile = "/usr/local/ecloud/index/manger_statis.index"

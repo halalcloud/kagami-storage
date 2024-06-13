@@ -1,0 +1,43 @@
+# listen
+ApiListen = "localhost:3001"
+
+#rebalance max thread num of store
+MaxStoreRebalanceThreadNum = 10
+#rebalance max thread num of disk
+MaxDiskRebalanceThreadNum = 3
+
+# enable golang pprof
+PprofEnable = true
+
+# pprof http addr
+PprofListen = "localhost:3066"
+
+
+[zookeeper]
+# zookeeper cluster addrs, multiple addrs split by ",".
+Addrs = [
+    "192.168.200.62:2181"
+]
+
+# zookeeper heartbeat timeout.
+Timeout = "15s"
+
+# zookeeper storeroot path.
+StoreRoot = "/rack"
+
+# zookeeper volumeroot path
+VolumeRoot = "/volume"
+
+# zookeeper grouproot path
+GroupRoot = "/group"
+
+#dispathcer have score and rolling
+DispatcherRoot = "/dispatcher"
+
+#rebalance root path
+RebalanceRoot = "/rebalance"
+
+# zookeeper pullinterval
+PullInterval = "10s"
+
+

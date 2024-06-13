@@ -1,0 +1,25 @@
+#this is a toml
+
+#mongo
+MURL = "192.168.200.63:27017"
+DB = "efsrsync"
+Task_Collection = "logqueue"
+Finish_Collection = "finish"
+
+#proxy
+ProxyMasterServerAddr=""
+
+#bucket
+BucketMasterServerAddr= "192.168.200.61:6081"
+BucketMasterServerAk= "ak"
+BucketMasterServerSk= "sk"
+BucketSlaveServerAddr= "192.168.200.12:3088" 
+BucketSlaveServerAk= "ak"
+BucketSlaveServerSk= "sk"
+
+#gos sync workers
+Workers = 20
+SliceSize = 4194304
+TaskRemainDuration = 3600
+UpHost = "http://172.18.14.161:6051"
+MgHost = "http://172.18.14.161:6051"

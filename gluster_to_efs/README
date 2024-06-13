@@ -1,0 +1,3 @@
+this program is copy a dir to efs.
+this dir files will be upload to efs,it is named fullpath.
+for example /a/b/1,/a/b/2,/a/b/3,upload /a this dir,/a/b/1 this file will be named b/1 in efs.

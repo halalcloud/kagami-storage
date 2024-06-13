@@ -1,0 +1,42 @@
+1.destorylist
+POST  /destroylist
+参数：
+url-form-encode
+ekey: b64(bucket)
+limit: 删除limit中废数据
+marker：hbase标记 默认没有
+
+返回: json
+DestroyListResponse.Ret  == 1 正确，其他错误
+
+//destory list
+type DestroyListResponse struct {
+    Ret    int            `json:"ret"`
+    Marker string         `json:"marker"` //表扫描完成，返回nil
+    DList  []*DestroyFile `json:"dlist"`
+}
+type DestroyFile struct {
+    FileName   string         `json:"filename"`
+    FileNeedle []*DFileNeedle `json:"fileneedle"`
+}
+type DFileNeedle struct {
+    Key    int64    `json:"key"`
+    Vid    int32    `json:"vid"`
+    Stores []string `json:"stores"`
+}
+
+
+
+2.destoryfile
+POST  /destroyfile
+参数：
+url-form-encode
+ekey： b64(bucket:filename)
+
+返回：json
+DestoryResponse.Ret  == 1 正确，其他错误
+
+//destory
+type DestroyFileResponse struct {
+    Ret int `json:"ret"`
+}

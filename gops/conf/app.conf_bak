@@ -1,0 +1,21 @@
+appname = gops
+httpport = 8087
+runmode = dev
+
+TemplateLeft=<<<
+TemplateRight=>>>
+
+MysqlDSN=root:gosun.com@tcp(192.168.100.185:3306)/gops?charset=utf8
+
+[dev]
+ZkServers=192.168.10.120:2181
+ZkTimeout=1
+StorePullInterval = 5
+VolumeReserve = 5
+RebalanceServer=192.168.200.60:3001
+MaxRetainSpace = 15728640
+
+MailHost=smtp.exmail.qq.com
+MailServerAddr=smtp.exmail.qq.com:25
+MailUser=zhangyongxiang@gosun.com
+MailPasswd=xxxxxxxx

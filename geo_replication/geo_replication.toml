@@ -1,0 +1,26 @@
+PprofEnable = true 
+PprofListen = "192.168.100.98:9011"
+
+# api
+DownloadPort = ""
+BlockSize =   "4194304"
+UploadMethod = "/r/upload"
+UploadMkfile = "/r/mkfile"
+DeleteMethod = "/b/delete"
+Copy         = "/r/copy"
+Mv          = "/r/move"
+DeleteBucket = "/b/delete"
+
+#bucket
+BcacheTimeout = 600
+BucketAk      ="ak"
+BucketSk      ="sk"
+BucketAddr    ="192.168.200.12:3088"
+
+#dest ftp
+RootPath ="/gluster"
+
+#kafka
+ZookeeperString ="192.168.200.60:2181,192.168.200.61:2181,192.168.200.62:2181"
+ConsumerGroup   = "efs_geo"
+Topic       = "test"
