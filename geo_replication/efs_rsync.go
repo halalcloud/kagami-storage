@@ -15,8 +15,9 @@ import (
 	"strings"
 	"time"
 
+	"kagamistoreage/kafka/consumergroup"
+
 	"github.com/IBM/sarama"
-	"github.com/wvanbergen/kafka/consumergroup"
 	"github.com/wvanbergen/kazoo-go"
 )
 
