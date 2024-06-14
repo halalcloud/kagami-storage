@@ -66,7 +66,7 @@ $ go install
 $ cp proxy.toml /ecloud/bin/proxy.toml
 
 ```
-到此所有的环境都搭建完成！
+到此所有的环境都搭建完成。
 
 ### 五、启动
 ```sh

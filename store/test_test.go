@@ -20,7 +20,7 @@ var (
 			Rack:     "rack-a",
 			ServerId: "store-a",
 			Addrs:    []string{"localhost:2181"},
-			Timeout:  conf.Duration{time.Second},
+			Timeout:  conf.Duration{Duration: time.Second},
 		},
 		Store: &conf.Store{
 			VolumeIndex:     "./test/volume.idx",
@@ -28,7 +28,7 @@ var (
 		},
 		Volume: &conf.Volume{
 			SyncDelete:      10,
-			SyncDeleteDelay: conf.Duration{10 * time.Second},
+			SyncDeleteDelay: conf.Duration{Duration: 10 * time.Second},
 		},
 		Block: &conf.Block{
 			BufferSize:    4 * 1024 * 1024,
@@ -37,7 +37,7 @@ var (
 		},
 		Index: &conf.Index{
 			BufferSize:    4 * 1024 * 1024,
-			MergeDelay:    conf.Duration{10 * time.Second},
+			MergeDelay:    conf.Duration{Duration: 10 * time.Second},
 			MergeWrite:    5,
 			RingBuffer:    10,
 			SyncWrite:     10,

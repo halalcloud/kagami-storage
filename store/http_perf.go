@@ -12,6 +12,5 @@ func StartPprof(addr string) {
 	if err = http.ListenAndServe(addr, nil); err != nil {
 		log.Errorf("http.ListenAndServe(\"%s\") error(%v)", addr, err)
 		panic(err)
-		return
 	}
 }

@@ -230,7 +230,6 @@ func (p *Pitchfork) Probe() {
 		close(stop)
 	}
 
-	return
 }
 
 // divide a set of stores between a set of pitchforks.
@@ -643,5 +642,4 @@ func (p *Pitchfork) checkNeedles_del(store *meta.Store, stop chan struct{}) (err
 				}
 		*/
 	}
-	return
 }
