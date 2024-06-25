@@ -37,7 +37,7 @@ func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 	// init http
 	if err = StartApi(c); err != nil {
-		log.Error("http.Init() error(%v)", err)
+		log.Errorf("http.Init() error(%v)", err)
 		panic(err)
 	}
 	if c.PprofEnable {
@@ -46,7 +46,8 @@ func main() {
 	}
 
 	ch := make(chan os.Signal, 1)
-	signal.Notify(ch, syscall.SIGHUP, syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT, syscall.SIGSTOP)
+	//  syscall.SIGSTOP
+	signal.Notify(ch, syscall.SIGHUP, syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT)
 	for {
 		s := <-ch
 		log.Infof("get a signal %s", s.String())

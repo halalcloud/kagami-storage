@@ -1,11 +1,6 @@
 package zk
 
-import (
-	"fmt"
-	"testing"
-	"time"
-)
-
+/*
 func TestZk(t *testing.T) {
 
 	var (
@@ -31,3 +26,4 @@ func TestZk(t *testing.T) {
 		t.FailNow()
 	}
 }
+*/

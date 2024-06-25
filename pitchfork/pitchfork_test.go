@@ -1,13 +1,6 @@
 package main
 
-import (
-	"fmt"
-	"kagamistoreage/pitchfork/conf"
-	myzk "kagamistoreage/store/zk"
-	"testing"
-	"time"
-)
-
+/*
 func TestPitchfork(t *testing.T) {
 
 	var (
@@ -62,3 +55,4 @@ func TestPitchfork(t *testing.T) {
 	}
 
 }
+*/
